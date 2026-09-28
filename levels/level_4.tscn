@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" path="res://seasire.tscn" id="16_a7qdg"]
 [ext_resource type="PackedScene" path="res://button.tscn" id="17_g1ha7"]
 [ext_resource type="PackedScene" path="res://door.tscn" id="18_g1ha7"]
-[ext_resource type="PackedScene" path="res://deactivator.tscn" id="19_52a3b"]
 [ext_resource type="PackedScene" path="res://bridge_machine.tscn" id="20_52a3b"]
 [ext_resource type="PackedScene" path="res://sky.tscn" id="20_sky"]
 [ext_resource type="PackedScene" path="res://planarioda.tscn" id="21_3ff1r"]
@@ -117,19 +116,9 @@ color = "blue"
 [node name="Door" parent="." unique_id=109450697 instance=ExtResource("18_g1ha7")]
 position = Vector2(1022, 1025)
 
-[node name="Deactivator" parent="." unique_id=1665026034 instance=ExtResource("19_52a3b")]
-position = Vector2(1108, 1257)
-sight_range = 600.0
-
-[node name="Deactivator2" parent="." unique_id=1348679823 instance=ExtResource("19_52a3b")]
-position = Vector2(835, 1001)
-
 [node name="BridgeMachine" parent="." unique_id=45539919 instance=ExtResource("20_52a3b")]
 position = Vector2(1422, 769)
 facing = -1
-
-[node name="Deactivator3" parent="." unique_id=2086181262 instance=ExtResource("19_52a3b")]
-position = Vector2(1065, 749)
 
 [node name="Levipad3" parent="." unique_id=1570262689 instance=ExtResource("11_vru0x")]
 position = Vector2(860, 774)
