@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://sprites/spear_hit.png" id="1_texture"]
+[ext_resource type="Script" path="res://spear_hit.gd" id="2_script"]
+
+[node name="SpearHit" type="Sprite2D"]
+z_index = 10
+texture_filter = 1
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_texture")
+script = ExtResource("2_script")

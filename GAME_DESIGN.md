@@ -16,7 +16,7 @@ Items marked [ASSUMED] are an interpretation to confirm.
   cave goes inside (it disappears) and can't come back out, move, act or be
   hurt; control passes to a character still outside, and characters in the
   cave can't be switched to. The level completes when all 4 are inside it.
-  Then the next level loads; there are 8 levels.
+  Then the next level loads; there are 6 levels.
 - Falling out of the bottom of a level kills the character.
 - Every character can attack enemies (each has its own attack below).
 - Every character can press buttons: any character stepping on a floor
@@ -68,8 +68,8 @@ Object groups:
 - `burnable_red`: wood (trees, boxes), ice, vines
 - `burnable_blue`: everything in `burnable_red`, plus torches
 - `grabbable`: ores, ice cubes, sticks, Squadroshock platforms, enemies
-- `movable`: items Transpora can carry in its backpack (gems so far)
-  [OPEN: which other items]
+- `movable`: items Transpora can carry in its backpack (gems and the
+  peculiar item so far) [OPEN: which other items]
 - `button`, `lever`, `machine`
 
 Decorative tiles: the yellow-grass dirt (1,1), grey slab (2,2), grey and green
@@ -146,6 +146,16 @@ lying-flat plank art. `plank_length` sets how wide a gap
 it bridges (default 90 px, enough for a one-tile gap) and `plank_thickness`
 how thick it is (default 22 px); `falls_right` sets which way.
 
+Portals (`portal.tscn`, `sprites/portal.png`: frame 1 the entrance, frame 2
+the exit): one-way. A portal is either an entrance or an exit (`kind`),
+placed with its origin on the ground. A character that touches an entrance
+comes out at the exit named in its `destination`, feet on the exit's origin,
+still moving the way it was. Exits do nothing when touched, so for a way back
+place a second pair the other way round. Several entrances can share one
+exit. Only characters use portals (enemies and items pass through). Leave
+room above an exit (a character is put there even if a wall is in the way),
+and don't put an entrance where characters land coming out of an exit.
+
 Hazard groups:
 - `hazard_electric`, `hazard_fire`, `hazard_water`, `falling_rock`
 - Pillars: `fire_pillar`, `electric_pillar`
@@ -186,8 +196,9 @@ Enemies:
   any attack defeats it; Lobulux can grab and throw it. Animations: `swim` 1;
   `fire` 2, shown for a moment as it launches a spike, then back to `swim`.
 - Whiptail (`whiptail.tscn`, `sprites/whiptail.png`, a 2×3 grid of 96×96
-  frames): a lizard that walks back and forth along the ground like Landfish.
-  When a character comes up close in front of it (within 64 px) it stops and
+  frames, drawn at 1.5 times size): a lizard that walks back and forth along
+  the ground like Landfish.
+  When a character comes up close in front of it (within 96 px) it stops and
   bites; close behind it, it stops and lashes its tail back. It does one
   attack at a time, never both at once; each hits for 4 damage (8 for
   Transpora), and it waits 1.5 seconds before attacking again, walking on in
@@ -371,7 +382,10 @@ Health rules:
   front of it. With an item in the backpack the laser is 10 times as long
   (640 px instead of 64).
 - X: picks up an item into its backpack; X again puts it back down.
-  Items it can pick up are in the `movable` group. [OPEN: which items]
+  Items it can pick up are in the `movable` group: gems and the peculiar
+  item (`peculiar_item.tscn`, `sprites/peculiar_item.png`, a green stone
+  that does nothing itself and that only Transpora can move; Lobulux can't
+  grab it). [OPEN: which other items]
 - Backpack: holds one item; it's drawn closed while Transpora is carrying
   something, to show it can't pick up anything else.
 - Weaknesses: terrestrial (ground) enemies, like the Landfish and Carbot:

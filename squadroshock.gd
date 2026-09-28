@@ -2,6 +2,8 @@ extends "res://base_character.gd"
 
 
 const PLATFORM_SCENE = preload("res://platform.tscn")
+# The spark burst shown on an enemy the spear hits.
+const SPEAR_HIT_SCENE = preload("res://spear_hit.tscn")
 # Where the platform's centre goes relative to the sprite's centre, when facing right.
 const PLATFORM_OFFSET = Vector2(56, 4)
 # Squadroshock's head (the red beak at the top right of its art) is its weak spot: an enemy (or
@@ -16,10 +18,11 @@ const MAX_PLATFORMS = 10
 # of Squadroshock for X to switch it on or off instead of placing a platform.
 const MACHINE_REACH = 32.0
 
-# The electric spear's hit box, from the sprite's centre when facing right. It covers
-# the bolt sticking out past the shield in frame 8.
-const SPEAR_OFFSET = Vector2(22, 2)
-const SPEAR_SIZE = Vector2(20, 10)
+# The electric spear's hit box, from the sprite's centre when facing right. It starts at
+# the bolt sticking out past the shield in frame 8 and reaches 30 px beyond the art, so the
+# jab has some reach.
+const SPEAR_OFFSET = Vector2(36, 2)
+const SPEAR_SIZE = Vector2(48, 12)
 const SPEAR_TIME = 0.25
 
 # The platforms Squadroshock has placed that are still around.
@@ -88,6 +91,18 @@ func _slash() -> void:
 		return
 	_spawn_hitbox(SPEAR_OFFSET, SPEAR_SIZE, SPEAR_TIME)
 	_play_action("spear")
+
+
+# The spear is Squadroshock's only hit box, so every enemy it hits gets the spark burst.
+func _on_slash_hit(body: Node) -> void:
+	super(body)
+	if not body.is_in_group("enemies"):
+		return
+	var spark := SPEAR_HIT_SCENE.instantiate() as Node2D
+	# In the level, so it stays put, centred on the enemy's body (its collision shape).
+	get_parent().add_child(spark)
+	var shape := body.get_node_or_null("CollisionShape2D") as Node2D
+	spark.global_position = shape.global_position if shape else body.global_position
 
 
 func _place_platform() -> void:

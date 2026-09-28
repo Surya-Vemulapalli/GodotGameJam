@@ -4,14 +4,15 @@ extends Enemy
 # A lizard that walks along the ground, back and forth like Landfish. When a character comes up
 # close in front of it, it stops and bites them (mouth opening, frames 3 and 4); close behind it,
 # it stops and lashes its tail back at them (frame 6). It does one attack at a time, then walks on.
+# Its art is drawn at 1.5 times size (the sprite's scale), and its body and attacks match that.
 # How close (px, from the middle of its body) a character has to be to set it off, and how far
 # above or below.
-const ATTACK_REACH = 64.0
-const ATTACK_HEIGHT = 40.0
+const ATTACK_REACH = 96.0
+const ATTACK_HEIGHT = 60.0
 # Each attack: the animation, the frame of it that hits, and its hit box (x is measured forwards
 # from the middle of its body, so the tail's is negative) and size.
-const BITE = {"animation": "bite", "frame": 1, "offset": Vector2(36, -2), "size": Vector2(32, 32)}
-const WHIP = {"animation": "whip", "frame": 0, "offset": Vector2(-40, -10), "size": Vector2(40, 36)}
+const BITE = {"animation": "bite", "frame": 1, "offset": Vector2(54, -13), "size": Vector2(48, 48)}
+const WHIP = {"animation": "whip", "frame": 0, "offset": Vector2(-60, -25), "size": Vector2(60, 54)}
 # How long a hit box lasts, and how long after an attack before it can attack again.
 const HIT_TIME = 0.25
 const ATTACK_COOLDOWN = 1.5

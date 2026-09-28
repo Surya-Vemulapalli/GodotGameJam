@@ -19,7 +19,6 @@ camera = NodePath("Camera2D")
 spawn = NodePath("Spawn")
 exit = NodePath("Exit")
 title = "Level 6"
-next_level = "res://levels/level_7.tscn"
 
 [node name="Sky" parent="." instance=ExtResource("20_sky")]
 sky = 7

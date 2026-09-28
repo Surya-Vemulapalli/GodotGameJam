@@ -11,7 +11,7 @@ left = Transpora.
 
 The game opens on the start page (`start.tscn`, the main scene): Play starts
 `levels/level_1.tscn`, Controls opens the controls page (`controls.tscn`; update its text when
-controls change). The levels are `levels/level_1.tscn` ... `levels/level_8.tscn`. Each has a
+controls change). The levels are `levels/level_1.tscn` ... `levels/level_6.tscn`. Each has a
 `title` shown at the top of the screen. Each level's first child is a `Sky` (`sky.tscn`): its
 `sky` setting picks one of the nine skies on `sprites/skies.png` (1-9, left to right, top to
 bottom; level N uses sky N + 1; sky 1 is the start and controls pages' background). The picture
@@ -25,7 +25,7 @@ is the bottom of the cave, on the ground). A blue button (`button.tscn`, `color`
 it's in (everything connected to it), top row first; it does nothing outside water (level 4 has
 one in the right of two side-by-side pools). A character that walks into the cave stays inside
 it (hidden, `in_goal`); the level is finished when all four are inside; the root's `next_level` names the
-level that loads next (empty on level 8, which shows a "finished every level" message).
+level that loads next (empty on level 6, the last, which shows a "finished every level" message).
 Dying, or falling below y = 1500, restarts the level (as soon as the death animation ends). In a
 level, LB asks to restart it and LT asks to quit to the start page (`restart_dialog.tscn`). The solid tiles (vines at (0,0), dirt
 at (0,1)) fill their whole square, and the waterline (`water.gd`) is the top of the water tile,
@@ -48,7 +48,8 @@ burst into flame when fire hits them: sprite 23 on `items.png` for red fire,
 
 Pyrazure breathes red fire on a tap of X, and blue fire once X has been held for 1 s
 (`CHARGE_TIME` in `dragon.gd`; letting go sooner breathes red fire). Blue fire also burns
-robots (`mechanical` enemies) and counts as two hits on an enemy.
+robots (`mechanical` enemies) and counts as two hits on an enemy. Its hit box is bigger than red
+fire's: 40×26 px instead of 28×18 (`BLUE_HITBOX_SIZE` in `fire.gd`).
 
 ## Stalactites
 
@@ -69,6 +70,15 @@ the ground; Squadroshock and the Deactivator also use it to switch the pad they'
 with its top flush with the ground (origin 5 px below the ground's top): Squadroshock can't jump or
 step up. It's an `AnimatableBody2D` with one-way collision (jump up through it).
 Animations: `off` (frame 1), `on` (frame 2).
+
+## Portals
+
+A portal (`portal.tscn`, `portal.gd`, `class_name Portal`, an `Area2D`; `sprites/portal.png`, frame
+1 the entrance, frame 2 the exit) has its origin at its bottom, on the ground. `kind` (`entrance` or
+`exit`) picks the art and hit box, in the editor too (`@tool`). An entrance's `destination` names its
+exit; a character touching an entrance is moved (deferred) so its collision shape's feet are on the
+exit's origin, keeping its velocity. Exits do nothing, so a pair is one-way. Only characters
+(collision layer 3, mask 4) use them. Level 5 has an exit, `PortalOut`, beside the goal cave.
 
 ## Dragon animations
 
@@ -137,6 +147,10 @@ right, top to bottom (the last cell is empty).
 | `die` | 5 | no | Death. |
 
 Frame 2 isn't assigned yet.
+
+An enemy the spear hits gets a spark burst (`spear_hit.tscn`, `spear_hit.gd`,
+`sprites/spear_hit.png`) centred on its body: shown at 0.75 scale, it grows a little and fades out
+over 0.3 s.
 
 ## Lobulux animations
 
@@ -248,10 +262,11 @@ cell is empty).
 
 ### Whiptail (`whiptail.tscn`, `whiptail.gd`, `sprites/whiptail.png`)
 
-Walks back and forth like Landfish. A character within 64 px in front of it gets bitten; one
-within 64 px behind it gets lashed by its tail. One attack at a time, never both at once, then
+Walks back and forth like Landfish. A character within 96 px in front of it gets bitten; one
+within 96 px behind it gets lashed by its tail. One attack at a time, never both at once, then
 it waits 1.5 s before attacking again. Tagged `terrestrial`, `non_mechanical`. The sheet is a
-2×3 grid of **96×96** frames, numbered 1-6.
+2×3 grid of **96×96** frames, numbered 1-6, drawn at 1.5× (the sprite's `scale`; its body
+(84×72) and attack hit boxes in `whiptail.gd` are sized to match, feet 20 px below its origin).
 
 | Animation | Sheet frames | Loops | Use |
 |---|---|---|---|
@@ -323,7 +338,7 @@ Items marked [ASSUMED] are an interpretation to confirm.
   cave goes inside (it disappears) and can't come back out, move, act or be
   hurt; control passes to a character still outside, and characters in the
   cave can't be switched to. The level completes when all 4 are inside it.
-  Then the next level loads; there are 8 levels.
+  Then the next level loads; there are 6 levels.
 - Falling out of the bottom of a level kills the character.
 - Every character can attack enemies (each has its own attack below).
 - Every character can press buttons: any character stepping on a floor
@@ -334,9 +349,9 @@ Items marked [ASSUMED] are an interpretation to confirm.
   - Blue buttons drain water (they don't open doors). A blue button sits on
 	the floor of a pool and drains only the body of water it's in (every
 	water tile connected to it), from the top row down; one that isn't in
-    water does nothing. Other pools are never affected (see level 4, with
-    two pools side by side and the button in the right one). Floating
-    platforms sink with it and settle on the pool floor.
+	water does nothing. Other pools are never affected (see level 4, with
+	two pools side by side and the button in the right one). Floating
+	platforms sink with it and settle on the pool floor.
   - Birdloch, Seasire and Spikefish die when the water they're in drains
 	away.
   - Birdloch is never placed in a pool with a blue button in it. Other
@@ -375,8 +390,8 @@ Object groups:
 - `burnable_red`: wood (trees, boxes), ice, vines
 - `burnable_blue`: everything in `burnable_red`, plus torches
 - `grabbable`: ores, ice cubes, sticks, Squadroshock platforms, enemies
-- `movable`: items Transpora can carry in its backpack (gems so far)
-  [OPEN: which other items]
+- `movable`: items Transpora can carry in its backpack (gems and the
+  peculiar item so far) [OPEN: which other items]
 - `button`, `lever`, `machine`
 
 Decorative tiles: the yellow-grass dirt (1,1), grey slab (2,2), grey and green
@@ -453,6 +468,16 @@ lying-flat plank art. `plank_length` sets how wide a gap
 it bridges (default 90 px, enough for a one-tile gap) and `plank_thickness`
 how thick it is (default 22 px); `falls_right` sets which way.
 
+Portals (`portal.tscn`, `sprites/portal.png`: frame 1 the entrance, frame 2
+the exit): one-way. A portal is either an entrance or an exit (`kind`),
+placed with its origin on the ground. A character that touches an entrance
+comes out at the exit named in its `destination`, feet on the exit's origin,
+still moving the way it was. Exits do nothing when touched, so for a way back
+place a second pair the other way round. Several entrances can share one
+exit. Only characters use portals (enemies and items pass through). Leave
+room above an exit (a character is put there even if a wall is in the way),
+and don't put an entrance where characters land coming out of an exit.
+
 Hazard groups:
 - `hazard_electric`, `hazard_fire`, `hazard_water`, `falling_rock`
 - Pillars: `fire_pillar`, `electric_pillar`
@@ -493,8 +518,9 @@ Enemies:
   any attack defeats it; Lobulux can grab and throw it. Animations: `swim` 1;
   `fire` 2, shown for a moment as it launches a spike, then back to `swim`.
 - Whiptail (`whiptail.tscn`, `sprites/whiptail.png`, a 2×3 grid of 96×96
-  frames): a lizard that walks back and forth along the ground like Landfish.
-  When a character comes up close in front of it (within 64 px) it stops and
+  frames, drawn at 1.5 times size): a lizard that walks back and forth along
+  the ground like Landfish.
+  When a character comes up close in front of it (within 96 px) it stops and
   bites; close behind it, it stops and lashes its tail back. It does one
   attack at a time, never both at once; each hits for 4 damage (8 for
   Transpora), and it waits 1.5 seconds before attacking again, walking on in
@@ -645,24 +671,24 @@ Health rules:
   platform.
   Machines so far:
   - The mechanized door (`door.tscn`, a stone column from
-    `sprites/items.png`): solid while closed; open, it fades and anyone can
-    pass.
+	`sprites/items.png`): solid while closed; open, it fades and anyone can
+	pass.
   - The bridge machine (`bridge_machine.tscn`, sprite 21): placed on the
-    ground at the edge of a hole (or water), facing across it (`facing`).
-    Switched on, a bridge of planks (sprite 22) slides out level with the
-    ground until it reaches the ground on the far side (at most
-    `max_length`); switched off, it slides back in.
+	ground at the edge of a hole (or water), facing across it (`facing`).
+	Switched on, a bridge of planks (sprite 22) slides out level with the
+	ground until it reaches the ground on the far side (at most
+	`max_length`); switched off, it slides back in.
   - The levipad (`levipad.tscn`, `sprites/levipad.png`): a floating pad
-    (57×10 px, origin in its middle). Switched on (its red light shows),
-    it waits 1.5 seconds (time to get on), then rises `travel` px (default 128; negative goes down instead) from
+	(57×10 px, origin in its middle). Switched on (its red light shows),
+	it waits 1.5 seconds (time to get on), then rises `travel` px (default 128; negative goes down instead) from
 	where it's placed and sinks back, over and over at 80 px/s, waiting 3
 	seconds at the top (time to step off) and half a second at the bottom; anyone standing on it rides along.
 	Switched off, it stops where it is. `on` sets whether it starts on.
 	Place it with its top flush with the ground (its origin 5 px below
 	the ground's top) so characters can walk straight onto it; anyone whose
-    feet are on its top rides along, and Squadroshock can switch it while
-    standing on it.
-    Characters can jump up through it from below and land on top.
+	feet are on its top rides along, and Squadroshock can switch it while
+	standing on it.
+	Characters can jump up through it from below and land on top.
   Electric pillars aren't machines: Squadroshock stops them only by placing
   a platform on their pad.
 - Cannot jump.
@@ -678,7 +704,10 @@ Health rules:
   front of it. With an item in the backpack the laser is 10 times as long
   (640 px instead of 64).
 - X: picks up an item into its backpack; X again puts it back down.
-  Items it can pick up are in the `movable` group. [OPEN: which items]
+  Items it can pick up are in the `movable` group: gems and the peculiar
+  item (`peculiar_item.tscn`, `sprites/peculiar_item.png`, a green stone
+  that does nothing itself and that only Transpora can move; Lobulux can't
+  grab it). [OPEN: which other items]
 - Backpack: holds one item; it's drawn closed while Transpora is carrying
   something, to show it can't pick up anything else.
 - Weaknesses: terrestrial (ground) enemies, like the Landfish and Carbot:

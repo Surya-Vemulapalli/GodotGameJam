@@ -9,7 +9,9 @@ const SPEED = 200.0
 const WATER_LEEWAY = 4.0
 # How far ahead (px) _water_ahead looks when checking a step toward water.
 const WATER_STEP = 4.0
-const JUMP_VELOCITY = -400.0
+# Jump speed: with the default gravity (980 px/s²) this jumps about 118 px, enough to get up a
+# one-tile step but not a two-tile (128 px) one.
+const JUMP_VELOCITY = -480.0
 # On ice (anything in the "ice" group), how fast (px/s²) a character speeds up and slows down, so
 # it slides instead of starting and stopping at once.
 const ICE_ACCELERATION = 300.0

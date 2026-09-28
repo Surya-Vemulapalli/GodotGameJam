@@ -75,17 +75,19 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_whiptail"]
-size = Vector2(56, 32)
+size = Vector2(84, 72)
 
 [node name="Whiptail" type="CharacterBody2D"]
 script = ExtResource("2_script")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+position = Vector2(0, -10)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_whiptail")
 animation = &"walk"
 autoplay = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-14, 4)
+position = Vector2(-21, -16)
 shape = SubResource("RectangleShape2D_whiptail")
