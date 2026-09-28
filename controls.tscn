@@ -112,7 +112,7 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 16
 text = "EVERYONE (gamepad)
 Left stick: move (arrow keys on a keyboard)
-B: jump
+B: jump (not Squadroshock)
 X: main action
 Y: attack
 LB: restart the level (asks first)
@@ -122,9 +122,10 @@ D-pad: switch character
     right: Squadroshock
     down: Lobulux
     left: Transpora
+Menus: A picks, B means No or Back
 
-Get all four characters into the cave to finish a level.
-If anyone dies, the level starts over."
+Get all four characters into the cave to finish a level. Once inside, they stay there.
+If anyone dies or falls off the level, it starts over."
 autowrap_mode = 3
 
 [node name="Characters" type="Label" parent="Page/Columns"]
@@ -135,23 +136,25 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 16
 text = "PYRAZURE
-RB: switch between standing and crawling
-X: tap for red fire, hold 1 second for blue fire
-Y: claw (standing); torpedo roll (flying or swimming)
-Crawling, hold B to fly; in water, swim with the stick or B
-(swim up at the surface to climb out)
+RB: stand or crawl (can't stand up in water)
+X: tap for red fire, hold 1 s for blue fire
+Y: claw; flying or swimming, torpedo roll
+Crawling: hold B to fly; swim in water
+Swimming up (stick or B) leaps out of the water
 
-SQUADROSHOCK
-X: place a platform, or switch a machine it's next to
-Y: electric spear (can't jump)
+SQUADROSHOCK (can't jump)
+X: place a platform (10 at most)
+X at a machine (next to or on it): switch it
+Y: electric spear
 
-LOBULUX
+LOBULUX (can't move while holding)
 X: grab; X again, then push the stick to throw
 X next to a lever: pull it
 
 TRANSPORA
-X: pick up or put down an item
-Hold Y: laser, straight up"
+X: pick up or put down an item (onto a pedestal)
+Hold Y: laser straight up
+Carrying: Y fires a long laser for a moment"
 autowrap_mode = 3
 
 [node name="Back" type="Button" parent="Page"]

@@ -8,7 +8,7 @@ extends Node2D
 # Touching the lightning or flame is a hazard ("hazard_electric" / "hazard_fire") for the player
 # characters only; enemies pass through it unharmed. A Squadroshock
 # platform resting on the pad blocks it: the lightning or flame stops until the platform is
-# taken away. Its origin is the bottom of the pad, on the ground. Characters walk through the
+# taken away. A red button with the pillar in its `targets` switches it off for good (trigger()). Its origin is the bottom of the pad, on the ground. Characters walk through the
 # pad from the side; platforms land on it from above.
 const LOOKS = {
 	"electric": {"pad": Rect2(212, 59, 11, 5), "hazard": Rect2(276, 0, 18, 62), "offset": 6.0, "gap": 0.0},
@@ -27,6 +27,8 @@ const LOOKS = {
 		_update_look()
 
 var blocked := false
+# Switched off by a button: it stays off.
+var switched_off := false
 
 
 func _ready() -> void:
@@ -40,11 +42,17 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
-	var now_blocked := _platform_on_pad()
+	var now_blocked := switched_off or _platform_on_pad()
 	if now_blocked != blocked:
 		blocked = now_blocked
 		$Hazard.visible = not blocked
 		$Hazard/CollisionShape2D.set_deferred("disabled", blocked)
+
+
+# A red button with this pillar in its `targets` calls this: the lightning or flame goes out
+# for good.
+func trigger() -> void:
+	switched_off = true
 
 
 # Whether a platform has come to rest on the pad.

@@ -19,8 +19,6 @@ const ICE_ACCELERATION = 300.0
 const SLASH_REACH = 32.0
 const SLASH_SIZE = Vector2(32, 32)
 const SLASH_TIME = 0.15
-# Falling this far down means the character has fallen out of the level, which kills it.
-const FALL_DEATH_Y = 1500.0
 # Every character starts each level with this much health; at 0 it dies.
 const MAX_HEALTH = 16
 # Touching an enemy (anything in the "enemies" group) while not attacking, or a hazard, costs
@@ -53,6 +51,8 @@ var hurt_cooldown := 0.0
 var attack_time_left := 0.0
 # The level's tile layers, checked for water (tiles with the tileset's "water" flag).
 var tile_layers: Array[TileMapLayer] = []
+# Below this y it has fallen out of the level (see LevelBounds).
+var fall_death_y := LevelBounds.DEFAULT_FALL_DEATH_Y
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 # Notices enemies and hazards touching the character. It has a slightly bigger copy of each
@@ -65,6 +65,8 @@ func _ready() -> void:
 	# Enemies look for the player characters here.
 	add_to_group("characters")
 	tile_layers = Water.layers_beside(self)
+	# Falling below the level's lowest tiles means falling out of it, which kills it.
+	fall_death_y = LevelBounds.fall_death_y(tile_layers)
 	hurtbox = Area2D.new()
 	hurtbox.collision_layer = 0
 	for child in get_children():
@@ -98,7 +100,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 	move_and_slide()
 	_update_animation()
-	if global_position.y > FALL_DEATH_Y:
+	if global_position.y > fall_death_y:
 		die()
 	_check_enemy_contact(delta)
 

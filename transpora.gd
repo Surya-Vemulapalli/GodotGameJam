@@ -7,6 +7,8 @@ const LASER_SCENE = preload("res://transpora_laser.tscn")
 const LASER_OFFSET = Vector2(-4.5, -58)
 # With an item in the backpack the laser is this many times as long (stacked straight up).
 const FULL_BACKPACK_LASER = 10
+# That long laser can't be held: one press fires it for this long (seconds), held or not.
+const FULL_BACKPACK_LASER_TIME = 0.75
 # Transpora is weak to terrestrial (ground) enemies: touching one does this many times the
 # usual damage.
 const TERRESTRIAL_WEAKNESS = 2
@@ -19,8 +21,10 @@ const PUT_DOWN_OFFSET = Vector2(32, 16)
 var carrying := false
 # The item in the backpack. It rides along inside Transpora, hidden and switched off.
 var item: Node2D
-# The beam, while the special button is held.
+# The beam, while the slash button is held (or, the long one, for a moment).
 var laser: Area2D
+# While the long laser is firing: how long it has left (0 for the ordinary, held laser).
+var laser_time_left := 0.0
 
 
 func _ready() -> void:
@@ -40,8 +44,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			_put_down()
 		else:
 			_pick_up()
-	# Holding Y fires the laser (see _slash); letting go stops it.
-	elif event.is_action_released("slash"):
+	# Holding Y fires the laser (see _slash); letting go stops it, unless it's the long laser,
+	# which fires for a set time instead.
+	elif event.is_action_released("slash") and laser_time_left == 0.0:
 		_stop_laser()
 
 
@@ -52,8 +57,13 @@ func _physics_process(delta: float) -> void:
 	# Switching to another character (or dying) stops the laser.
 	if not active:
 		_stop_laser()
-	else:
-		laser.position = sprite.position + Vector2(LASER_OFFSET.x * facing, LASER_OFFSET.y)
+		return
+	if laser_time_left > 0.0:
+		laser_time_left -= delta
+		if laser_time_left <= 0.0:
+			_stop_laser()
+			return
+	laser.position = sprite.position + Vector2(LASER_OFFSET.x * facing, LASER_OFFSET.y)
 
 
 # Transpora's animation names are listed in CLAUDE.md.
@@ -78,6 +88,15 @@ func _is_attacking() -> bool:
 	return super() or laser != null
 
 
+# The laser hits enemies like any attack; with an item in the backpack (the long laser) it defeats
+# a Gem Eater in one hit.
+func _on_slash_hit(body: Node) -> void:
+	if carrying and body.is_in_group("gem_eater"):
+		body.hit(body.hits)
+	else:
+		super(body)
+
+
 func _start_laser() -> void:
 	if laser or playing_action:
 		return
@@ -86,6 +105,7 @@ func _start_laser() -> void:
 	laser.body_entered.connect(_on_slash_hit)
 	if carrying:
 		_lengthen_laser(FULL_BACKPACK_LASER)
+		laser_time_left = FULL_BACKPACK_LASER_TIME
 	add_child(laser)
 
 
@@ -105,6 +125,7 @@ func _lengthen_laser(segments: int) -> void:
 
 
 func _stop_laser() -> void:
+	laser_time_left = 0.0
 	if laser:
 		laser.queue_free()
 		laser = null

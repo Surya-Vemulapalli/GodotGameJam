@@ -9,6 +9,8 @@ const MAX_DEATH_TIME = 0.5
 # trigger).
 const RESTART_DIALOG = preload("res://restart_dialog.tscn")
 const START_PAGE = "res://start.tscn"
+# Shown once the last level (no next_level) is finished.
+const END_PAGE = "res://end.tscn"
 
 # Which D-pad direction switches to which character. Leave a slot empty if it isn't used.
 @export var up_character: BaseCharacter
@@ -122,18 +124,8 @@ func _enter_goal(character: BaseCharacter) -> void:
 
 func _finish() -> void:
 	finished = true
-	if next_level:
-		get_tree().change_scene_to_file.call_deferred(next_level)
-		return
-	# That was the last level.
-	var layer := CanvasLayer.new()
-	var label := Label.new()
-	label.text = "You finished every level!"
-	label.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-	layer.add_child(label)
-	add_child(layer)
-	for character in _characters():
-		character.active = false
+	# After the last level, the end page.
+	get_tree().change_scene_to_file.call_deferred(next_level if next_level else END_PAGE)
 
 
 func _unhandled_input(event: InputEvent) -> void:

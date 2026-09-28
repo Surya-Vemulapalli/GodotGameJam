@@ -22,7 +22,8 @@ Items marked [ASSUMED] are an interpretation to confirm.
 - Every character can press buttons: any character stepping on a floor
   button (`button.tscn`) presses it, and it stays pressed.
   - Red buttons open the wooden doors in their `targets` list, and set off
-	any stalactites in it. All red buttons look alike, so a level can hide
+	any stalactites in it, and switch off any pillars in it for good. All
+	red buttons look alike, so a level can hide
 	trap buttons among the one that opens the door.
   - Blue buttons drain water (they don't open doors). A blue button sits on
 	the floor of a pool and drains only the body of water it's in (every
@@ -100,7 +101,8 @@ Pillars (`pillar.tscn`, `kind` electric or fire): a pad on the ground with
 lightning (sprite 5, on the yellow nozzle, sprite 4) or a flame (sprite 7, on the red nozzle, sprite 6) rising from it. The
 lightning is in `hazard_electric`, the flame in `hazard_fire`. A Squadroshock
 platform resting on the pad blocks the pillar: the lightning or flame stops
-until the platform is taken away (e.g. Lobulux picks it up). `height` stacks
+until the platform is taken away (e.g. Lobulux picks it up). A red button
+with the pillar in its `targets` switches it off for good. `height` stacks
 the lightning or flame that many segments high; make it tall enough that
 Pyrazure can't fly over it (level 1's is 100). Pillars only affect the
 player characters: enemies pass straight through the lightning and flame
@@ -230,10 +232,13 @@ Enemies:
 - Gem Eater (`gem_eater.tscn`, `sprites/gem_eater.png`): a creature that eats
   gems. It stands still while there are no loose gems in the level; once
   there is one (not carried, held or on a pedestal), it runs at the nearest
-  one really fast (400 px/s), jumping walls and stopping short of water, and
+  one really fast (400 px/s), jumping walls and stopping short of water (if
+  the gem is below the ground it's on, it runs to the nearer end of that
+  ground and drops off), and
   eats it: the gem is gone for good. It never attacks, and touching it
   doesn't hurt. It takes two hits to defeat (it blinks for half a second
-  after the first), but being thrown by Lobulux defeats it outright. Tagged
+  after the first), but being thrown by Lobulux, or Transpora's laser while
+  it has an item in its backpack, defeats it outright. Tagged
   `enemies`, `terrestrial`, `non_mechanical`. Animations: `idle` 1, `run` 3,
   4, `eat` 2.
 - Neverpig (`neverpig.tscn`, `sprites/neverpig.png`): a flying pig that flies
@@ -283,6 +288,19 @@ Enemies:
   `non_mechanical` (not terrestrial, so it does Transpora the usual damage).
   Touching it deals 4 damage; any attack destroys it; Lobulux can grab and
   throw it. Animations: `idle` 1 (legs tucked in), `walk` 2, 3, 4.
+- Missilebird (`missilebird.tscn`, `sprites/missilebird.png`): a homing
+  bird that goes after one character, chosen per placement (`target`:
+  Pyrazure, Squadroshock, Lobulux or Transpora). It flies at them at 160
+  px/s, ignoring gravity: straight at them when nothing solid is in the
+  way, otherwise along a path round the walls. Walls still stop it (it
+  can't fly through them), so cover buys time, but it finds its way round. Touching its target
+  kills that character outright (whatever its health) and uses the
+  Missilebird up. Any other character it touches on the way takes the usual
+  4 damage, and it keeps flying. Once its target is dead or in the cave it
+  hovers where it is. Tagged `enemies`, `aerial`, `non_mechanical`. Any
+  attack defeats it; Lobulux can grab and throw it (a held Missilebird
+  can't hurt anyone). Animation: `fly` 1 (a single frame, drawn nose down
+  and turned to face the way it's flying).
 
 Health: every player character has 16 health (shown top-left), refilled when
 the level (re)starts; at 0 it dies. Touching an enemy while not attacking costs
@@ -349,24 +367,24 @@ Health rules:
   platform.
   Machines so far:
   - The mechanized door (`door.tscn`, a stone column from
-    `sprites/items.png`): solid while closed; open, it fades and anyone can
-    pass.
+	`sprites/items.png`): solid while closed; open, it fades and anyone can
+	pass.
   - The bridge machine (`bridge_machine.tscn`, sprite 21): placed on the
-    ground at the edge of a hole (or water), facing across it (`facing`).
-    Switched on, a bridge of planks (sprite 22) slides out level with the
-    ground until it reaches the ground on the far side (at most
-    `max_length`); switched off, it slides back in.
+	ground at the edge of a hole (or water), facing across it (`facing`).
+	Switched on, a bridge of planks (sprite 22) slides out level with the
+	ground until it reaches the ground on the far side (at most
+	`max_length`); switched off, it slides back in.
   - The levipad (`levipad.tscn`, `sprites/levipad.png`): a floating pad
-    (57×10 px, origin in its middle). Switched on (its red light shows),
-    it waits 1.5 seconds (time to get on), then rises `travel` px (default 128; negative goes down instead) from
+	(57×10 px, origin in its middle). Switched on (its red light shows),
+	it waits 1.5 seconds (time to get on), then rises `travel` px (default 128; negative goes down instead) from
 	where it's placed and sinks back, over and over at 80 px/s, waiting 3
 	seconds at the top (time to step off) and half a second at the bottom; anyone standing on it rides along.
 	Switched off, it stops where it is. `on` sets whether it starts on.
 	Place it with its top flush with the ground (its origin 5 px below
 	the ground's top) so characters can walk straight onto it; anyone whose
-    feet are on its top rides along, and Squadroshock can switch it while
-    standing on it.
-    Characters can jump up through it from below and land on top.
+	feet are on its top rides along, and Squadroshock can switch it while
+	standing on it.
+	Characters can jump up through it from below and land on top.
   Electric pillars aren't machines: Squadroshock stops them only by placing
   a platform on their pad.
 - Cannot jump.
@@ -380,7 +398,8 @@ Health rules:
 
 - Attack (Y, hold): a laser straight up out of its head. Cannot attack in
   front of it. With an item in the backpack the laser is 10 times as long
-  (640 px instead of 64).
+  (640 px instead of 64), but it can't be held: one press fires it for 3/4
+  of a second.
 - X: picks up an item into its backpack; X again puts it back down.
   Items it can pick up are in the `movable` group: gems and the peculiar
   item (`peculiar_item.tscn`, `sprites/peculiar_item.png`, a green stone

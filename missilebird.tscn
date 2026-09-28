@@ -1,0 +1,35 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://sprites/missilebird.png" id="1_sheet"]
+[ext_resource type="Script" path="res://missilebird.gd" id="2_script"]
+
+[sub_resource type="AtlasTexture" id="Atlas_f1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_missilebird"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f1")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_missilebird"]
+size = Vector2(24, 24)
+
+[node name="Missilebird" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("2_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_missilebird")
+animation = &"fly"
+autoplay = "fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_missilebird")

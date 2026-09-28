@@ -9,8 +9,6 @@ extends CharacterBody2D
 const SPEED = 60.0
 # After a hit that doesn't defeat it, it blinks and can't be hit again for this long.
 const HIT_COOLDOWN = 0.5
-# Falling this far down means it has fallen out of the level.
-const FALL_DEATH_Y = 1500.0
 
 # -1 moving left, 1 moving right. Enemies start off moving the way their art faces.
 var direction := -1
@@ -18,6 +16,8 @@ var direction := -1
 var art_faces_left := true
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var tile_layers: Array[TileMapLayer] = []
+# Below this y it has fallen out of the level (see LevelBounds).
+var fall_death_y := LevelBounds.DEFAULT_FALL_DEATH_Y
 # Held by Lobulux: it stops moving and nothing touches it.
 var held := false
 # Flying after Lobulux threw it.
@@ -40,6 +40,8 @@ func _ready() -> void:
 	add_to_group("enemies")
 	add_to_group("grabbable")
 	tile_layers = Water.layers_beside(self)
+	# Falling below the level's lowest tiles means it has fallen out of the level.
+	fall_death_y = LevelBounds.fall_death_y(tile_layers)
 
 
 func _physics_process(delta: float) -> void:
@@ -52,7 +54,7 @@ func _physics_process(delta: float) -> void:
 		_fly(delta)
 	else:
 		_move(delta)
-	if global_position.y > FALL_DEATH_Y:
+	if global_position.y > fall_death_y:
 		queue_free()
 
 

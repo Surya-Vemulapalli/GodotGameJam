@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://0mxxs1llhe44"]
+
+[ext_resource type="Script" uid="uid://btaj0g7aw21tu" path="res://end.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://cbk64r55njh6" path="res://sprites/end_page.png" id="2_background"]
+
+[sub_resource type="StyleBoxFlat" id="Style_focus"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_hover"]
+bg_color = Color(0.18, 0.22, 0.36, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_normal"]
+bg_color = Color(0.1, 0.12, 0.2, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_pressed"]
+bg_color = Color(0.05, 0.06, 0.11, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="Theme" id="Theme_menu"]
+Button/styles/focus = SubResource("Style_focus")
+Button/styles/hover = SubResource("Style_hover")
+Button/styles/normal = SubResource("Style_normal")
+Button/styles/pressed = SubResource("Style_pressed")
+
+[node name="End" type="Control" unique_id=835464734]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="BackgroundColor" type="ColorRect" parent="." unique_id=2036388715]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.72, 0.76, 1)
+
+[node name="Background" type="TextureRect" parent="." unique_id=1931022874]
+self_modulate = Color(1, 1, 1, 0.6)
+texture_filter = 1
+texture_repeat = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_background")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Page" type="VBoxContainer" parent="." unique_id=219514795]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_menu")
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="YouWon" type="Label" parent="Page" unique_id=706779164]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.1, 0.12, 0.2, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 96
+text = "You won!!"
+horizontal_alignment = 1
+
+[node name="Thanks" type="Label" parent="Page" unique_id=1545710136]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.1, 0.12, 0.2, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 64
+text = "Thanks for playing"
+horizontal_alignment = 1
+
+[node name="StartPage" type="Button" parent="Page" unique_id=1122870322]
+custom_minimum_size = Vector2(240, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "Start page"

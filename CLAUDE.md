@@ -25,8 +25,11 @@ is the bottom of the cave, on the ground). A blue button (`button.tscn`, `color`
 it's in (everything connected to it), top row first; it does nothing outside water (level 4 has
 one in the right of two side-by-side pools). A character that walks into the cave stays inside
 it (hidden, `in_goal`); the level is finished when all four are inside; the root's `next_level` names the
-level that loads next (empty on level 6, the last, which shows a "finished every level" message).
-Dying, or falling below y = 1500, restarts the level (as soon as the death animation ends). In a
+level that loads next (empty on level 6, the last, which goes to the end page, `end.tscn`: "You
+won!!" and "Thanks for playing" on separate lines over `sprites/end_page.png` tiled (at 60% opacity over a light reddish pink `BackgroundColor`), with a button
+back to the start page).
+Dying, or falling out of the bottom of the level (256 px below its lowest tile: `LevelBounds` in
+`level_bounds.gd`; enemies that fall that far are removed), restarts the level (as soon as the death animation ends). In a
 level, LB asks to restart it and LT asks to quit to the start page (`restart_dialog.tscn`). The solid tiles (vines at (0,0), dirt
 at (0,1)) fill their whole square, and the waterline (`water.gd`) is the top of the water tile,
 so pools sit level with solid ground.
@@ -180,7 +183,8 @@ Use these animation names.
 
 Holding "slash" (Y) fires Transpora's laser (`transpora_laser.tscn`, art in
 `sprites/transpora_laser.png`) straight up out of the top of its head; the `_laser`
-animations show the head opened while it fires. "special" (X) picks up an item (anything
+animations show the head opened while it fires. With an item in the backpack the laser is 10
+times as long and can't be held: a press fires it for 0.75 s (`FULL_BACKPACK_LASER_TIME`). "special" (X) picks up an item (anything
 in the `movable` group) into the backpack and puts it back down. The `carry_` animations
 show the backpack closed while an item is inside (`carrying` in `transpora.gd`).
 
@@ -280,8 +284,12 @@ it waits 1.5 s before attacking again. Tagged `terrestrial`, `non_mechanical`. T
 Never attacks and is `harmless`. It doesn't move unless there's a loose gem in the level (in
 the `gems` group, visible, collision on: not in Transpora's backpack, held by Lobulux or on a
 pedestal, which takes it out of `gems`). Then it runs at the nearest one at 400 px/s, jumping
-walls and stopping short of water, and eats it (the gem is gone for good). Takes 2 hits
-(`hits = 2`); being thrown still defeats it outright. Tagged `terrestrial`, `non_mechanical`.
+walls, dropping off the nearer end of its ground when the gem is below it (searching up to 2560 px
+each way, `DROP_SEARCH`), and stopping short of water, and eats it (the gem is gone for good). Its
+own movement ignores other enemies (collision exceptions), so they don't block it; a thrown enemy
+still hits it. Gems in its `ignored_gems` list are left alone (level 6's ignores `Gem6`). Takes 2 hits
+(`hits = 2`); being thrown still defeats it outright, and so does Transpora's laser while it's
+`carrying` (it's in the `gem_eater` group; `transpora.gd` calls `hit(hits)`). Tagged `terrestrial`, `non_mechanical`.
 2×2 sheet.
 
 | Animation | Sheet frames | Loops | Use |
@@ -315,8 +323,22 @@ a bridge machine's bridge in and stops a levipad. Give any new machine the same 
 | `walk` | 1, 3, 1, 4 | yes | Walking to a running machine. |
 | `deactivate` | 2 | no | Poking a machine with its probe (the frame lasts four times as long). |
 
-None of Seasire, Spikefish, Whiptail, the Gem Eater, the Warmcopter or the Deactivator is placed
-in a level yet.
+### Missilebird (`missilebird.tscn`, `missilebird.gd`, `sprites/missilebird.png`)
+
+Homes in on one character, picked per placement with `target` (found by its script, e.g.
+`dragon.gd` for Pyrazure): flies at its sprite at 160 px/s (`FLY_SPEED`), ignoring gravity, in
+floating motion mode so it slides along walls. While a ray to the target hits something solid, it
+follows an `AStarGrid2D` path over the level's tiles (tiles with collision are blocked; water isn't),
+re-found every 0.25 s (`REPATH_TIME`); doors and barriers aren't in the grid, so it waits at them. Once its target's hurtbox overlaps it,
+it calls the target's `die()` and frees itself; other characters take normal contact damage from
+it and it flies on. Hovers once the target is dead or `in_goal`. Tagged `aerial`,
+`non_mechanical`. 64×64, one frame drawn nose down; the sprite is rotated to the flight direction.
+
+| Animation | Sheet frames | Loops | Use |
+|---|---|---|---|
+| `fly` | 1 | yes | Flying. Autoplays. |
+
+The Missilebird isn't placed in a level yet.
 
 ## Game design (copy of GAME_DESIGN.md)
 
@@ -344,7 +366,8 @@ Items marked [ASSUMED] are an interpretation to confirm.
 - Every character can press buttons: any character stepping on a floor
   button (`button.tscn`) presses it, and it stays pressed.
   - Red buttons open the wooden doors in their `targets` list, and set off
-	any stalactites in it. All red buttons look alike, so a level can hide
+	any stalactites in it, and switch off any pillars in it for good. All
+	red buttons look alike, so a level can hide
 	trap buttons among the one that opens the door.
   - Blue buttons drain water (they don't open doors). A blue button sits on
 	the floor of a pool and drains only the body of water it's in (every
@@ -422,7 +445,8 @@ Pillars (`pillar.tscn`, `kind` electric or fire): a pad on the ground with
 lightning (sprite 5, on the yellow nozzle, sprite 4) or a flame (sprite 7, on the red nozzle, sprite 6) rising from it. The
 lightning is in `hazard_electric`, the flame in `hazard_fire`. A Squadroshock
 platform resting on the pad blocks the pillar: the lightning or flame stops
-until the platform is taken away (e.g. Lobulux picks it up). `height` stacks
+until the platform is taken away (e.g. Lobulux picks it up). A red button
+with the pillar in its `targets` switches it off for good. `height` stacks
 the lightning or flame that many segments high; make it tall enough that
 Pyrazure can't fly over it (level 1's is 100). Pillars only affect the
 player characters: enemies pass straight through the lightning and flame
@@ -552,10 +576,13 @@ Enemies:
 - Gem Eater (`gem_eater.tscn`, `sprites/gem_eater.png`): a creature that eats
   gems. It stands still while there are no loose gems in the level; once
   there is one (not carried, held or on a pedestal), it runs at the nearest
-  one really fast (400 px/s), jumping walls and stopping short of water, and
+  one really fast (400 px/s), jumping walls and stopping short of water (if
+  the gem is below the ground it's on, it runs to the nearer end of that
+  ground and drops off), and
   eats it: the gem is gone for good. It never attacks, and touching it
   doesn't hurt. It takes two hits to defeat (it blinks for half a second
-  after the first), but being thrown by Lobulux defeats it outright. Tagged
+  after the first), but being thrown by Lobulux, or Transpora's laser while
+  it has an item in its backpack, defeats it outright. Tagged
   `enemies`, `terrestrial`, `non_mechanical`. Animations: `idle` 1, `run` 3,
   4, `eat` 2.
 - Neverpig (`neverpig.tscn`, `sprites/neverpig.png`): a flying pig that flies
@@ -605,6 +632,19 @@ Enemies:
   `non_mechanical` (not terrestrial, so it does Transpora the usual damage).
   Touching it deals 4 damage; any attack destroys it; Lobulux can grab and
   throw it. Animations: `idle` 1 (legs tucked in), `walk` 2, 3, 4.
+- Missilebird (`missilebird.tscn`, `sprites/missilebird.png`): a homing
+  bird that goes after one character, chosen per placement (`target`:
+  Pyrazure, Squadroshock, Lobulux or Transpora). It flies at them at 160
+  px/s, ignoring gravity: straight at them when nothing solid is in the
+  way, otherwise along a path round the walls. Walls still stop it (it
+  can't fly through them), so cover buys time, but it finds its way round. Touching its target
+  kills that character outright (whatever its health) and uses the
+  Missilebird up. Any other character it touches on the way takes the usual
+  4 damage, and it keeps flying. Once its target is dead or in the cave it
+  hovers where it is. Tagged `enemies`, `aerial`, `non_mechanical`. Any
+  attack defeats it; Lobulux can grab and throw it (a held Missilebird
+  can't hurt anyone). Animation: `fly` 1 (a single frame, drawn nose down
+  and turned to face the way it's flying).
 
 Health: every player character has 16 health (shown top-left), refilled when
 the level (re)starts; at 0 it dies. Touching an enemy while not attacking costs
@@ -702,7 +742,8 @@ Health rules:
 
 - Attack (Y, hold): a laser straight up out of its head. Cannot attack in
   front of it. With an item in the backpack the laser is 10 times as long
-  (640 px instead of 64).
+  (640 px instead of 64), but it can't be held: one press fires it for 3/4
+  of a second.
 - X: picks up an item into its backpack; X again puts it back down.
   Items it can pick up are in the `movable` group: gems and the peculiar
   item (`peculiar_item.tscn`, `sprites/peculiar_item.png`, a green stone

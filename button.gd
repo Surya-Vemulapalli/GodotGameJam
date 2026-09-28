@@ -5,7 +5,8 @@ extends Area2D
 
 # A button on the floor: any character stepping on it presses it, and it stays pressed.
 # - Red: opens the wooden doors (or anything else with an `open` setting) in its `targets`, and
-#   sets off anything there with a trigger() (like a stalactite, which falls).
+#   sets off anything there with a trigger() (like a stalactite, which falls, or a pillar, which
+#   goes out).
 # - Blue: sits in a pool (on its floor) and drains that pool, and only that one: the body of water
 #   it's in drains away from the top row down. A blue button that isn't in water does nothing.
 # Its origin is the bottom of the button, on the ground; nothing collides with it.
