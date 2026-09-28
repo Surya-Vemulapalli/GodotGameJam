@@ -1,0 +1,92 @@
+[gd_scene format=4 uid="uid://cbcb00g2keyse"]
+
+[ext_resource type="PackedScene" uid="uid://b1lntemb7t1c4" path="res://dragon.tscn" id="1_dragon"]
+[ext_resource type="Script" uid="uid://c3jirdrdbd4l2" path="res://character_switcher.gd" id="2_switcher"]
+[ext_resource type="PackedScene" uid="uid://qggkstt2rsnt" path="res://squadroshock.tscn" id="3_squadroshock"]
+[ext_resource type="TileSet" uid="uid://cl30mytqkqixu" path="res://tileset.tres" id="4_tileset"]
+[ext_resource type="PackedScene" path="res://lobulux.tscn" id="5_lobulux"]
+[ext_resource type="PackedScene" path="res://transpora.tscn" id="6_transpora"]
+[ext_resource type="PackedScene" path="res://exit.tscn" id="7_exit"]
+[ext_resource type="PackedScene" path="res://flame_door.tscn" id="8_at1ld"]
+[ext_resource type="PackedScene" path="res://goblet.tscn" id="9_sd18g"]
+[ext_resource type="PackedScene" path="res://pillar.tscn" id="10_sd18g"]
+[ext_resource type="PackedScene" path="res://neverpig.tscn" id="11_wcjpl"]
+[ext_resource type="PackedScene" path="res://barrier.tscn" id="12_5orea"]
+[ext_resource type="PackedScene" path="res://pedestal.tscn" id="13_0ourt"]
+[ext_resource type="PackedScene" path="res://rope_plank.tscn" id="14_5orea"]
+[ext_resource type="PackedScene" path="res://sky.tscn" id="20_sky"]
+
+[node name="Level_2" type="Node2D" unique_id=866911915 node_paths=PackedStringArray("up_character", "right_character", "down_character", "left_character", "camera", "spawn", "exit")]
+script = ExtResource("2_switcher")
+up_character = NodePath("Pyrazure")
+right_character = NodePath("Squadroshock")
+down_character = NodePath("Lobulux")
+left_character = NodePath("Transpora")
+camera = NodePath("Camera2D")
+spawn = NodePath("Spawn")
+exit = NodePath("Exit")
+next_level = "res://levels/level_3.tscn"
+title = "Level 2"
+
+[node name="Sky" parent="." unique_id=619755461 instance=ExtResource("20_sky")]
+sky = 3
+
+[node name="Spawn" type="Marker2D" parent="." unique_id=68830391]
+position = Vector2(268, -612)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=334056565]
+texture_filter = 1
+position = Vector2(-33, -684)
+tile_map_data = PackedByteArray("AAADAAQAAAAAAAEAAAAEAAQAAAAAAAEAAAAFAAQAAAAAAAEAAAAGAAQAAAAAAAEAAAACAAQAAAAAAAEAAAABAAQAAAAAAAEAAAABAAMAAAAAAAEAAAABAAIAAAAAAAEAAAABAAEAAAAAAAEAAAABAAAAAAAAAAEAAAAFAP//AAAAAAEAAAAGAP//AAAAAAEAAAAHAP//AAAAAAEAAAAIAP//AAAAAAEAAAAJAP//AAAAAAEAAAAKAP//AAAAAAEAAAALAP//AAAAAAEAAAAMAP//AAAAAAEAAAAEAP//AAAAAAEAAAAHAAQAAAAAAAEAAAAIAAQAAAAAAAEAAAAKAAQAAAAAAAEAAAAJAAQAAAAAAAEAAAALAAQAAAAAAAEAAAAMAAQAAAAAAAEAAAAQAAQAAAAAAAEAAAARAAQAAAAAAAEAAAASAAQAAAAAAAEAAAASAAMAAAAAAAEAAAASAAIAAAAAAAEAAAASAAEAAAAAAAEAAAASAAAAAAAAAAEAAAASAP//AAAAAAEAAAARAP//AAAAAAEAAAAQAP//AAAAAAEAAAAPAP//AAAAAAEAAAAOAP//AAAAAAEAAAANAP//AAAAAAEAAAAMAAUAAAAAAAEAAAAPAAYAAAAAAAEAAAAPAAcAAAAAAAEAAAAPAAgAAAAAAAEAAAAMAAYAAAAAAAEAAAAMAAcAAAAAAAEAAAAMAAgAAAAAAAEAAAALAAgAAAAAAAEAAAAKAAgAAAAAAAEAAAAJAAgAAAAAAAEAAAAIAAgAAAAAAAEAAAAGAAgAAAAAAAEAAAAHAAgAAAAAAAEAAAAQAAgAAAAAAAEAAAARAAgAAAAAAAEAAAASAAgAAAAAAAEAAAATAAgAAAAAAAEAAAAUAAgAAAAAAAEAAAAVAAgAAAAAAAEAAAAVAAkAAAAAAAEAAAAVAAoAAAAAAAEAAAAVAAsAAAAAAAEAAAAVAAwAAAAAAAEAAAAFAAgAAAAAAAEAAAAFAAkAAAAAAAEAAAAFAAoAAAAAAAEAAAAEAAsAAAAAAAEAAAADAAsAAAAAAAEAAAACAAsAAAAAAAEAAAABAAsAAAAAAAEAAAAFAAsAAAAAAAEAAAAAAAsAAAAAAAEAAAAAAAwAAAAAAAEAAAAAAA0AAAAAAAEAAAAAAA4AAAAAAAEAAAAAAA8AAAAAAAEAAAAAABAAAAAAAAEAAAAVAA0AAAAAAAEAAAAVAA4AAAAAAAEAAAAVAA8AAAAAAAEAAAAUAA8AAAACAAEAAAATAA8AAAACAAEAAAASAA8AAAACAAEAAAABABAAAAACAAEAAAACABAAAAACAAEAAAADABAAAAACAAEAAAAFABAAAAACAAEAAAAEABAAAAACAAEAAAAGABAAAAACAAEAAAAHABAAAAACAAEAAAAIABAAAAACAAEAAAAJABAAAAAAAAEAAAALABAAAAAAAAEAAAAKABAAAAAAAAEAAAAMABAAAAAAAAEAAAANABAAAAAAAAEAAAANAA8AAAACAAEAAAADAP//AAAAAAEAAAACAP//AAAAAAEAAAABAP//AAAAAAEAAAAPAAUAAAAAAAEAAAAPAAQAAAAAAAEAAAARAAMAAQAAAAMAAAARAA8AAAACAAEAAAALAA8AAAACAAEAAAAMAA8AAAACAAEAAAARAAIAAQABAAIAAAA=")
+tile_set = ExtResource("4_tileset")
+
+[node name="Exit" parent="." unique_id=1178155574 instance=ExtResource("7_exit")]
+position = Vector2(1256, 297)
+
+[node name="Pyrazure" parent="." unique_id=1947211559 instance=ExtResource("1_dragon")]
+position = Vector2(268, -589)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1594858204]
+position = Vector2(145, -508)
+
+[node name="Squadroshock" parent="." unique_id=1780621566 instance=ExtResource("3_squadroshock")]
+position = Vector2(219, -591)
+
+[node name="Lobulux" parent="." unique_id=2070152656 instance=ExtResource("5_lobulux")]
+position = Vector2(150, -588)
+
+[node name="Transpora" parent="." unique_id=744686167 instance=ExtResource("6_transpora")]
+position = Vector2(104, -586)
+
+[node name="FlameDoor" parent="." unique_id=778668220 instance=ExtResource("8_at1ld")]
+position = Vector2(618, -428)
+height = 4
+
+[node name="Goblet" parent="." unique_id=1072855043 node_paths=PackedStringArray("targets") instance=ExtResource("9_sd18g")]
+position = Vector2(482, -427)
+targets = [NodePath("../FlameDoor")]
+
+[node name="Pillar" parent="." unique_id=1307343036 instance=ExtResource("10_sd18g")]
+position = Vector2(537, -428)
+height = 4
+
+[node name="Neverpig" parent="." unique_id=1158765187 instance=ExtResource("11_wcjpl")]
+position = Vector2(1138, -63)
+wall_to_wall = true
+
+[node name="Barrier" parent="." unique_id=1587226421 instance=ExtResource("12_5orea")]
+position = Vector2(775, -439)
+rotation = 1.5707964
+
+[node name="Pedestal2" parent="." unique_id=1556317493 instance=ExtResource("13_0ourt")]
+position = Vector2(1026, -684)
+kind = "cyan"
+on_ceiling = true
+
+[node name="Pedestal" parent="." unique_id=1648128936 instance=ExtResource("13_0ourt")]
+position = Vector2(952, -684)
+on_ceiling = true
+
+[node name="RopePlank" parent="." unique_id=743927161 instance=ExtResource("14_5orea")]
+position = Vector2(863, 292)
+plank_length = 225.0

@@ -1,0 +1,40 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://pillar.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://sprites/items.png" id="2_items"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pad"]
+size = Vector2(11, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hazard"]
+size = Vector2(14, 62)
+
+[node name="Pillar" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Pad" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Pad"]
+texture_filter = 1
+position = Vector2(0, -2.5)
+texture = ExtResource("2_items")
+region_enabled = true
+region_rect = Rect2(212, 59, 11, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pad"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_pad")
+one_way_collision = true
+
+[node name="Hazard" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Hazard"]
+texture_filter = 1
+position = Vector2(6, -36)
+texture = ExtResource("2_items")
+region_enabled = true
+region_rect = Rect2(276, 0, 18, 62)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard"]
+position = Vector2(6, -36)
+shape = SubResource("RectangleShape2D_hazard")

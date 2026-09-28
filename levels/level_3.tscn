@@ -1,0 +1,92 @@
+[gd_scene format=4 uid="uid://ds18jgnchpip8"]
+
+[ext_resource type="PackedScene" uid="uid://b1lntemb7t1c4" path="res://dragon.tscn" id="1_dragon"]
+[ext_resource type="Script" uid="uid://c3jirdrdbd4l2" path="res://character_switcher.gd" id="2_switcher"]
+[ext_resource type="PackedScene" uid="uid://qggkstt2rsnt" path="res://squadroshock.tscn" id="3_squadroshock"]
+[ext_resource type="TileSet" uid="uid://cl30mytqkqixu" path="res://tileset.tres" id="4_tileset"]
+[ext_resource type="PackedScene" path="res://lobulux.tscn" id="5_lobulux"]
+[ext_resource type="PackedScene" path="res://transpora.tscn" id="6_transpora"]
+[ext_resource type="PackedScene" path="res://exit.tscn" id="7_exit"]
+[ext_resource type="PackedScene" path="res://door.tscn" id="9_0unm6"]
+[ext_resource type="PackedScene" path="res://button.tscn" id="10_q42ux"]
+[ext_resource type="PackedScene" path="res://shelby.tscn" id="11_wi0qq"]
+[ext_resource type="PackedScene" path="res://zach.tscn" id="12_s3q8p"]
+[ext_resource type="PackedScene" path="res://pillar.tscn" id="13_q42ux"]
+[ext_resource type="PackedScene" path="res://stalactite.tscn" id="14_wi0qq"]
+[ext_resource type="PackedScene" path="res://sky.tscn" id="20_sky"]
+
+[node name="Level_3" type="Node2D" unique_id=1292552781 node_paths=PackedStringArray("up_character", "right_character", "down_character", "left_character", "camera", "spawn", "exit")]
+script = ExtResource("2_switcher")
+up_character = NodePath("Pyrazure")
+right_character = NodePath("Squadroshock")
+down_character = NodePath("Lobulux")
+left_character = NodePath("Transpora")
+camera = NodePath("Camera2D")
+spawn = NodePath("Spawn")
+exit = NodePath("Exit")
+next_level = "res://levels/level_4.tscn"
+title = "Level 3"
+
+[node name="Sky" parent="." unique_id=2117230429 instance=ExtResource("20_sky")]
+sky = 4
+
+[node name="Spawn" type="Marker2D" parent="." unique_id=831547048]
+position = Vector2(352, 100)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=42465956]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAADAAQAAAAAAAEAAAAEAAQAAAAAAAEAAAAFAAQAAAAAAAEAAAAGAAQAAAAAAAEAAAACAAQAAAAAAAEAAAAWAAQAAAAAAAEAAAAXAAQAAAAAAAEAAAAYAAQAAAAAAAEAAAAHAAQAAAAAAAEAAAAHAAUAAAAAAAEAAAAHAAYAAAAAAAEAAAAHAAcAAAAAAAEAAAAHAAgAAAAAAAEAAAAHAAkAAAAAAAEAAAAHAAoAAAAAAAEAAAAIAAoAAAAAAAEAAAAJAAoAAAAAAAEAAAAKAAoAAAAAAAEAAAALAAoAAAAAAAEAAAAMAAoAAAAAAAEAAAANAAoAAAAAAAEAAAAPAAoAAAAAAAEAAAAQAAoAAAAAAAEAAAAOAAoAAAAAAAEAAAARAAoAAAAAAAEAAAAWAAUAAAAAAAEAAAAWAAYAAAAAAAEAAAAWAAcAAAAAAAEAAAAWAAgAAAAAAAEAAAAWAAkAAAAAAAEAAAAWAAoAAAAAAAEAAAAVAAoAAAAAAAEAAAATAAoAAAAAAAEAAAAUAAoAAAAAAAEAAAASAAoAAAAAAAEAAAAIAAQAAAABAAIAAAAKAAQAAAABAAIAAAAJAAQAAAABAAIAAAALAAQAAAABAAIAAAAMAAQAAAABAAIAAAAOAAQAAAABAAIAAAANAAQAAAABAAIAAAAPAAQAAAABAAIAAAARAAQAAAABAAIAAAAQAAQAAAABAAIAAAASAAQAAAABAAIAAAAUAAQAAAABAAIAAAATAAQAAAABAAIAAAAVAAQAAAABAAIAAAAIAAUAAAAAAAIAAAAJAAUAAAAAAAIAAAALAAUAAAAAAAIAAAAKAAUAAAAAAAIAAAAMAAUAAAAAAAIAAAANAAUAAAAAAAIAAAAOAAUAAAAAAAIAAAAPAAUAAAAAAAIAAAARAAUAAAAAAAIAAAAQAAUAAAAAAAIAAAASAAUAAAAAAAIAAAATAAUAAAAAAAIAAAAUAAUAAAAAAAIAAAAVAAUAAAAAAAIAAAAIAAYAAAAAAAIAAAAJAAYAAAAAAAIAAAAKAAYAAAAAAAIAAAAMAAYAAAAAAAIAAAALAAYAAAAAAAIAAAANAAYAAAAAAAIAAAAOAAYAAAAAAAIAAAAPAAYAAAAAAAIAAAAQAAYAAAAAAAIAAAASAAYAAAAAAAIAAAARAAYAAAAAAAIAAAATAAYAAAAAAAIAAAAUAAYAAAAAAAIAAAAVAAYAAAAAAAIAAAAIAAcAAAAAAAIAAAAJAAcAAAAAAAIAAAALAAcAAAAAAAIAAAAKAAcAAAAAAAIAAAAMAAcAAAAAAAIAAAANAAcAAAAAAAIAAAAOAAcAAAAAAAIAAAAQAAcAAAAAAAIAAAAPAAcAAAAAAAIAAAARAAcAAAAAAAIAAAASAAcAAAAAAAIAAAATAAcAAAAAAAIAAAAUAAcAAAAAAAIAAAAVAAcAAAAAAAIAAAAIAAgAAAAAAAIAAAAJAAgAAAAAAAIAAAAKAAgAAAAAAAIAAAALAAgAAAAAAAIAAAAMAAgAAAAAAAIAAAANAAgAAAAAAAIAAAAOAAgAAAAAAAIAAAAPAAgAAAAAAAIAAAAQAAgAAAAAAAIAAAARAAgAAAAAAAIAAAASAAgAAAAAAAIAAAATAAgAAAAAAAIAAAAUAAgAAAAAAAIAAAAVAAgAAAAAAAIAAAAVAAkAAAAAAAIAAAAUAAkAAAAAAAIAAAATAAkAAAAAAAIAAAASAAkAAAAAAAIAAAARAAkAAAAAAAIAAAAQAAkAAAAAAAIAAAAPAAkAAAAAAAIAAAAOAAkAAAAAAAIAAAANAAkAAAAAAAIAAAAMAAkAAAAAAAIAAAALAAkAAAAAAAIAAAAKAAkAAAAAAAIAAAAJAAkAAAAAAAIAAAAIAAkAAAAAAAIAAAABAAQAAAAAAAEAAAABAAMAAAAAAAEAAAABAAIAAAAAAAEAAAABAAEAAAAAAAEAAAABAAAAAAAAAAEAAAABAP//AAAAAAEAAAACAP//AAAAAAEAAAADAP//AAAAAAEAAAAEAP//AAAAAAEAAAAFAP//AAAAAAEAAAAJAPn/AAAAAAEAAAAKAPn/AAAAAAEAAAALAPn/AAAAAAEAAAAMAPn/AAAAAAEAAAANAPn/AAAAAAEAAAAOAPn/AAAAAAEAAAAPAPn/AAAAAAEAAAAQAPn/AAAAAAEAAAARAPn/AAAAAAEAAAASAPn/AAAAAAEAAAATAPn/AAAAAAEAAAAUAPn/AAAAAAEAAAAVAPn/AAAAAAEAAAAWAPn/AAAAAAEAAAAXAPn/AAAAAAEAAAAYAPn/AAAAAAEAAAAZAPn/AAAAAAEAAAAaAPn/AAAAAAEAAAAbAPn/AAAAAAEAAAAcAPn/AAAAAAEAAAAdAPn/AAAAAAEAAAAeAPn/AAAAAAEAAAAfAPn/AAAAAAEAAAAfAPr/AAAAAAEAAAAfAPv/AAAAAAEAAAAfAPz/AAAAAAEAAAAfAP3/AAAAAAEAAAAfAP7/AAAAAAEAAAAfAP//AAAAAAEAAAABAP3/AAAAAAEAAAA=")
+tile_set = ExtResource("4_tileset")
+
+[node name="Exit" parent="." unique_id=222507112 instance=ExtResource("7_exit")]
+position = Vector2(1356, 638)
+
+[node name="Pyrazure" parent="." unique_id=2062766303 instance=ExtResource("1_dragon")]
+position = Vector2(301, 99)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=726680150]
+
+[node name="Squadroshock" parent="." unique_id=1594395013 instance=ExtResource("3_squadroshock")]
+position = Vector2(241, 100)
+
+[node name="Lobulux" parent="." unique_id=619485899 instance=ExtResource("5_lobulux")]
+position = Vector2(173, 103)
+
+[node name="Transpora" parent="." unique_id=1689796876 instance=ExtResource("6_transpora")]
+position = Vector2(131, 93)
+
+[node name="Door" parent="." unique_id=326599810 instance=ExtResource("9_0unm6")]
+position = Vector2(495, 251)
+height = 12
+style = "wood"
+
+[node name="Button" parent="." unique_id=1516254647 node_paths=PackedStringArray("targets") instance=ExtResource("10_q42ux")]
+position = Vector2(131, 99)
+rotation = 1.5707964
+targets = [NodePath("../Door")]
+
+[node name="Button2" parent="." unique_id=1771425526 instance=ExtResource("10_q42ux")]
+position = Vector2(1212, 641)
+color = "blue"
+
+[node name="Shelby" parent="." unique_id=782098348 instance=ExtResource("11_wi0qq")]
+position = Vector2(1083, 622)
+
+[node name="Zach" parent="." unique_id=971584082 instance=ExtResource("12_s3q8p")]
+position = Vector2(1498, 234)
+
+[node name="Button3" parent="." unique_id=728024367 node_paths=PackedStringArray("targets") instance=ExtResource("10_q42ux")]
+position = Vector2(868, 645)
+targets = [NodePath("../Stalactite")]
+
+[node name="Pillar" parent="." unique_id=1594632692 instance=ExtResource("13_q42ux")]
+position = Vector2(1275, 633)
+height = 7
+
+[node name="Pillar2" parent="." unique_id=1819193311 instance=ExtResource("13_q42ux")]
+position = Vector2(1971, -147)
+rotation = 4.712389
+height = 30
+
+[node name="Stalactite" parent="." unique_id=347529147 instance=ExtResource("14_wi0qq")]
+position = Vector2(880, -387)

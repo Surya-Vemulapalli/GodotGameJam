@@ -1,0 +1,228 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://cxkcexbcc43pk" path="res://base_character.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://sprites/transpora.png" id="2_sheet"]
+[ext_resource type="Script" path="res://transpora.gd" id="3_script"]
+
+[sub_resource type="AtlasTexture" id="Atlas_f1"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f3"]
+atlas = ExtResource("2_sheet")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f6"]
+atlas = ExtResource("2_sheet")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f7"]
+atlas = ExtResource("2_sheet")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f8"]
+atlas = ExtResource("2_sheet")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f9"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f10"]
+atlas = ExtResource("2_sheet")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f11"]
+atlas = ExtResource("2_sheet")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f13"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f14"]
+atlas = ExtResource("2_sheet")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f15"]
+atlas = ExtResource("2_sheet")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f16"]
+atlas = ExtResource("2_sheet")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f17"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f2"]
+atlas = ExtResource("2_sheet")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f4"]
+atlas = ExtResource("2_sheet")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f5"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f12"]
+atlas = ExtResource("2_sheet")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_transpora"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f6")
+}],
+"loop": true,
+"name": &"idle_laser",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f7")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f9")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f1")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f8")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f6")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f10")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f6")
+}],
+"loop": true,
+"name": &"walk_laser",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f11")
+}],
+"loop": true,
+"name": &"carry_idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f13")
+}],
+"loop": true,
+"name": &"carry_idle_laser",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f14")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f11")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f16")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f11")
+}],
+"loop": true,
+"name": &"carry_walk",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f15")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f13")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f17")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f13")
+}],
+"loop": true,
+"name": &"carry_walk_laser",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f3")
+}],
+"loop": false,
+"name": &"die",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f4")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f5")
+}],
+"loop": false,
+"name": &"pick_up",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f12")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f4")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f2")
+}],
+"loop": false,
+"name": &"put_down",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_transpora"]
+size = Vector2(30, 57)
+
+[node name="Transpora" instance=ExtResource("1_base")]
+script = ExtResource("3_script")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_transpora")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(29, 133.5)
+shape = SubResource("RectangleShape2D_transpora")

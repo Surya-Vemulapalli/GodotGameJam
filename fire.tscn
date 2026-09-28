@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" uid="uid://ck5j4307pky04" path="res://sprites/Fire.png" id="1_fire"]
+[ext_resource type="Script" path="res://fire.gd" id="2_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fire"]
+size = Vector2(28, 18)
+
+[node name="Fire" type="Area2D"]
+script = ExtResource("2_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(16, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_fire")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_fire")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(16, 0)
+rect = Rect2(-16, -11, 32, 22)

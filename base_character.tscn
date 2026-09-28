@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cxkcexbcc43pk"]
+
+[ext_resource type="Texture2D" uid="uid://bo2cur5dems31" path="res://icon.svg" id="1_75idt"]
+[ext_resource type="Script" uid="uid://dypjeu4p7tvwu" path="res://base_character.gd" id="2_move"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_base"]
+size = Vector2(128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_otkx8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_75idt")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="BaseCharacter" type="CharacterBody2D" unique_id=1173841392]
+collision_layer = 4
+script = ExtResource("2_move")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1173920313]
+position = Vector2(41, 133)
+sprite_frames = SubResource("SpriteFrames_otkx8")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1911096139]
+position = Vector2(41, 133)
+shape = SubResource("RectangleShape2D_base")

@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://sprites/items.png" id="1_items"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cave"]
+size = Vector2(92, 80)
+
+[node name="Exit" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -40)
+scale = Vector2(2, 2)
+texture = ExtResource("1_items")
+region_enabled = true
+region_rect = Rect2(18, 11, 46, 40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -40)
+shape = SubResource("RectangleShape2D_cave")

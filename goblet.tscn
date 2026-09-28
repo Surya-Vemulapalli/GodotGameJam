@@ -1,0 +1,21 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://goblet.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://sprites/items.png" id="2_items"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_goblet"]
+size = Vector2(29, 50)
+
+[node name="Goblet" type="Area2D"]
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -25)
+texture = ExtResource("2_items")
+region_enabled = true
+region_rect = Rect2(338, 203, 29, 50)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_goblet")

@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://qggkstt2rsnt"]
+
+[ext_resource type="PackedScene" uid="uid://cxkcexbcc43pk" path="res://base_character.tscn" id="1_base"]
+[ext_resource type="Texture2D" uid="uid://burnqegeybrsw" path="res://sprites/squadroshock.png" id="2_sheet"]
+[ext_resource type="Script" uid="uid://ca3lrtkcs38l1" path="res://squadroshock.gd" id="3_script"]
+
+[sub_resource type="AtlasTexture" id="Atlas_f5"]
+atlas = ExtResource("2_sheet")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f6"]
+atlas = ExtResource("2_sheet")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f7"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f8"]
+atlas = ExtResource("2_sheet")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f1"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f3"]
+atlas = ExtResource("2_sheet")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f4"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_squadroshock"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f5")
+}],
+"loop": 0,
+"name": &"die",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f6")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f7")
+}],
+"loop": 0,
+"name": &"place_platform",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f8")
+}],
+"loop": 0,
+"name": &"spear",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f1")
+}],
+"loop": 1,
+"name": &"stand_idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f3")
+}],
+"loop": 1,
+"name": &"stand_walk",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f4")
+}],
+"loop": 0,
+"name": &"toggle_machine",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_squadroshock"]
+size = Vector2(51, 61)
+
+[node name="Squadroshock" unique_id=1348211241 instance=ExtResource("1_base")]
+script = ExtResource("3_script")
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=1173920313]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_squadroshock")
+animation = &"stand_walk"
+autoplay = "stand_idle"
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1911096139]
+position = Vector2(37.5, 132.5)
+shape = SubResource("RectangleShape2D_squadroshock")

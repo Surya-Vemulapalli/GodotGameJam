@@ -1,0 +1,21 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://sprites/items.png" id="1_items"]
+[ext_resource type="Script" path="res://stalactite.gd" id="2_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_stalactite"]
+size = Vector2(24, 44)
+
+[node name="Stalactite" type="Area2D"]
+script = ExtResource("2_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 25.5)
+texture = ExtResource("1_items")
+region_enabled = true
+region_rect = Rect2(208, 256, 37, 51)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 28)
+shape = SubResource("RectangleShape2D_stalactite")

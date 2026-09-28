@@ -1,0 +1,43 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://sprites/squadroshock_platform.png" id="1_sheet"]
+[ext_resource type="Script" path="res://platform.gd" id="2_script"]
+
+[sub_resource type="AtlasTexture" id="Atlas_upright"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_flat"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_platform"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_upright")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_flat")
+}],
+"loop": false,
+"name": &"deploy",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
+size = Vector2(52, 8)
+
+[node name="Platform" type="StaticBody2D"]
+script = ExtResource("2_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-2, -14)
+sprite_frames = SubResource("SpriteFrames_platform")
+animation = &"deploy"
+autoplay = "deploy"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_platform")
+one_way_collision = true

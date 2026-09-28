@@ -1,0 +1,179 @@
+[gd_scene format=3 uid="uid://dq8eua5mcsgpf"]
+
+[ext_resource type="Script" uid="uid://doyvmnyfjvnip" path="res://start.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://b5dnspheksk3u" path="res://sprites/Pyrazure.png" id="2_pyrazure"]
+[ext_resource type="Texture2D" uid="uid://burnqegeybrsw" path="res://sprites/squadroshock.png" id="3_squadroshock"]
+[ext_resource type="Texture2D" uid="uid://mpvlpt6r16u" path="res://sprites/lobulux.png" id="4_lobulux"]
+[ext_resource type="Texture2D" uid="uid://bqxc3sybamqby" path="res://sprites/transpora.png" id="5_transpora"]
+[ext_resource type="Texture2D" uid="uid://c42jitt4r437w" path="res://sprites/skies.png" id="6_background"]
+
+[sub_resource type="AtlasTexture" id="Atlas_sky"]
+atlas = ExtResource("6_background")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="StyleBoxFlat" id="Style_focus"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_hover"]
+bg_color = Color(0.18, 0.22, 0.36, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_normal"]
+bg_color = Color(0.1, 0.12, 0.2, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_pressed"]
+bg_color = Color(0.05, 0.06, 0.11, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="Theme" id="Theme_menu"]
+Button/styles/focus = SubResource("Style_focus")
+Button/styles/hover = SubResource("Style_hover")
+Button/styles/normal = SubResource("Style_normal")
+Button/styles/pressed = SubResource("Style_pressed")
+
+[sub_resource type="AtlasTexture" id="Atlas_pyrazure"]
+atlas = ExtResource("2_pyrazure")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_squadroshock"]
+atlas = ExtResource("3_squadroshock")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_lobulux"]
+atlas = ExtResource("4_lobulux")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_transpora"]
+atlas = ExtResource("5_transpora")
+region = Rect2(0, 0, 64, 64)
+
+[node name="Start" type="Control" unique_id=1272519194]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1585577108]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.976471, 0.933333, 1)
+
+[node name="Sky" type="TextureRect" parent="." unique_id=1062676196]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("Atlas_sky")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Menu" type="VBoxContainer" parent="." unique_id=540076500]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -250.0
+offset_right = 260.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_menu")
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Title" type="Label" parent="Menu" unique_id=868497642]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.1, 0.12, 0.2, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 56
+text = "4 the Adventure"
+horizontal_alignment = 1
+
+[node name="Characters" type="HBoxContainer" parent="Menu" unique_id=571677791]
+layout_mode = 2
+alignment = 1
+
+[node name="Pyrazure" type="TextureRect" parent="Menu/Characters" unique_id=57308415]
+texture_filter = 1
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+texture = SubResource("Atlas_pyrazure")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Squadroshock" type="TextureRect" parent="Menu/Characters" unique_id=1895176372]
+texture_filter = 1
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+texture = SubResource("Atlas_squadroshock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Lobulux" type="TextureRect" parent="Menu/Characters" unique_id=1667070263]
+texture_filter = 1
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+texture = SubResource("Atlas_lobulux")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Transpora" type="TextureRect" parent="Menu/Characters" unique_id=539884264]
+texture_filter = 1
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+texture = SubResource("Atlas_transpora")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Play" type="Button" parent="Menu" unique_id=1726563864]
+custom_minimum_size = Vector2(240, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "Play"
+
+[node name="Controls" type="Button" parent="Menu" unique_id=444098875]
+custom_minimum_size = Vector2(240, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "Controls"
+
+[node name="Quit" type="Button" parent="Menu" unique_id=445866962]
+custom_minimum_size = Vector2(240, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "Quit"

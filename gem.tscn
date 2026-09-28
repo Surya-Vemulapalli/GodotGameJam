@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://sprites/ore.png" id="1_ore"]
+[ext_resource type="Script" path="res://gem.gd" id="2_script"]
+
+[sub_resource type="AtlasTexture" id="Atlas_gem"]
+atlas = ExtResource("1_ore")
+region = Rect2(162, 21, 11, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gem"]
+size = Vector2(11, 16)
+
+[node name="Gem" type="StaticBody2D"]
+collision_layer = 16
+script = ExtResource("2_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("Atlas_gem")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gem")

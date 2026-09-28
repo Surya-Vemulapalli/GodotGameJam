@@ -1,0 +1,144 @@
+[gd_scene format=4 uid="uid://cu78iespgjsnt"]
+
+[ext_resource type="PackedScene" uid="uid://b1lntemb7t1c4" path="res://dragon.tscn" id="1_dragon"]
+[ext_resource type="Script" uid="uid://c3jirdrdbd4l2" path="res://character_switcher.gd" id="2_switcher"]
+[ext_resource type="PackedScene" uid="uid://qggkstt2rsnt" path="res://squadroshock.tscn" id="3_squadroshock"]
+[ext_resource type="TileSet" uid="uid://cl30mytqkqixu" path="res://tileset.tres" id="4_tileset"]
+[ext_resource type="PackedScene" path="res://lobulux.tscn" id="5_lobulux"]
+[ext_resource type="PackedScene" path="res://transpora.tscn" id="6_transpora"]
+[ext_resource type="PackedScene" path="res://exit.tscn" id="7_exit"]
+[ext_resource type="PackedScene" path="res://gem_eater.tscn" id="9_ng40l"]
+[ext_resource type="PackedScene" path="res://pedestal.tscn" id="10_04hp8"]
+[ext_resource type="PackedScene" path="res://levipad.tscn" id="11_vru0x"]
+[ext_resource type="PackedScene" path="res://ice.tscn" id="12_5oqfd"]
+[ext_resource type="PackedScene" path="res://birdloch.tscn" id="13_8mt0c"]
+[ext_resource type="PackedScene" path="res://landfish.tscn" id="14_dp2yl"]
+[ext_resource type="PackedScene" path="res://spikefish.tscn" id="15_dp2yl"]
+[ext_resource type="PackedScene" path="res://seasire.tscn" id="16_a7qdg"]
+[ext_resource type="PackedScene" path="res://button.tscn" id="17_g1ha7"]
+[ext_resource type="PackedScene" path="res://door.tscn" id="18_g1ha7"]
+[ext_resource type="PackedScene" path="res://deactivator.tscn" id="19_52a3b"]
+[ext_resource type="PackedScene" path="res://bridge_machine.tscn" id="20_52a3b"]
+[ext_resource type="PackedScene" path="res://sky.tscn" id="20_sky"]
+[ext_resource type="PackedScene" path="res://planarioda.tscn" id="21_3ff1r"]
+[ext_resource type="PackedScene" path="res://pillar.tscn" id="22_cmohj"]
+
+[node name="Level" type="Node2D" unique_id=518897027 node_paths=PackedStringArray("up_character", "right_character", "down_character", "left_character", "camera", "spawn", "exit")]
+script = ExtResource("2_switcher")
+up_character = NodePath("Pyrazure")
+right_character = NodePath("Squadroshock")
+down_character = NodePath("Lobulux")
+left_character = NodePath("Transpora")
+camera = NodePath("Camera2D")
+spawn = NodePath("Spawn")
+exit = NodePath("Exit")
+next_level = "res://levels/level_5.tscn"
+title = "Level 4"
+
+[node name="Sky" parent="." unique_id=716507688 instance=ExtResource("20_sky")]
+sky = 5
+
+[node name="Spawn" type="Marker2D" parent="." unique_id=296480068]
+position = Vector2(352, 100)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=420964442]
+texture_filter = 1
+position = Vector2(0, 1)
+tile_map_data = PackedByteArray("AAACAAQAAAACAAMAAAADAAQAAAACAAMAAAAEAAQAAAACAAMAAAAFAAQAAAACAAMAAAAGAAQAAAACAAMAAAAHAAQAAAACAAMAAAAIAAQAAAACAAMAAAAJAAQAAAACAAMAAAAJAAAAAAACAAMAAAAIAAAAAAACAAMAAAAHAAAAAAACAAMAAAAEAAAAAAACAAMAAAAGAAAAAAACAAMAAAAFAAAAAAACAAMAAAADAAAAAAACAAMAAAACAAAAAAACAAMAAAACAAEAAAACAAMAAAACAAIAAAACAAMAAAACAAMAAAACAAMAAAAJAAUAAAACAAMAAAAJAAYAAAACAAMAAAAHAAYAAAACAAMAAAAIAAYAAAACAAMAAAAGAAYAAAACAAMAAAAEAAYAAAACAAMAAAAFAAYAAAACAAMAAAADAAYAAAACAAMAAAABAAYAAAACAAMAAAACAAYAAAACAAMAAAAAAAYAAAACAAMAAAD//wYAAAACAAMAAAD+/wYAAAACAAMAAAD9/wYAAAACAAMAAAD8/wYAAAACAAMAAAAKAAAAAAACAAMAAAAMAAAAAAACAAMAAAALAAAAAAACAAMAAAAMAAEAAAACAAMAAAAMAAMAAAACAAMAAAAMAAIAAAACAAMAAAAMAAQAAAACAAMAAAAMAAUAAAACAAMAAAAMAAYAAAACAAMAAAAMAAcAAAACAAMAAAAMAAgAAAACAAMAAAAMAAkAAAACAAMAAAAMAAoAAAACAAMAAAAMAAsAAAACAAMAAAAMAAwAAAACAAMAAAALAAwAAAACAAMAAAAJAAwAAAACAAMAAAAKAAwAAAACAAMAAAAIAAsAAAACAAMAAAAIAAwAAAACAAMAAAAHAAwAAAACAAMAAAAHAAsAAAACAAMAAAAHAAoAAAACAAMAAAAGAAwAAAACAAMAAAAGAAsAAAACAAMAAAAIAAoAAAACAAMAAAAJAAoAAAACAAMAAAAKAAoAAAACAAMAAAALAAoAAAACAAMAAAALAAsAAAACAAMAAAAJAAsAAAACAAMAAAAKAAsAAAACAAMAAAAGAAoAAAACAAMAAAAFAAoAAAACAAMAAAAEAAoAAAACAAMAAAACAAoAAAACAAMAAAADAAoAAAACAAMAAAAAAAoAAAACAAMAAAABAAoAAAACAAMAAAD+/woAAAACAAMAAAD//woAAAACAAMAAAD9/woAAAACAAMAAAD8/woAAAACAAMAAAD7/wYAAAACAAMAAAD6/wYAAAACAAMAAAD5/wYAAAACAAMAAAD4/wYAAAACAAMAAAD3/wYAAAACAAMAAAD8/wkAAQABAAAAAAD8/wgAAQABAAAAAAD8/wcAAQAAAAAAAAD7/woAAAACAAMAAAD2/wcAAAACAAMAAAD1/wgAAAACAAMAAAD2/wYAAAACAAMAAAD1/wcAAAACAAMAAAD0/wgAAAACAAMAAAD6/woAAAACAAMAAAD5/wsAAAACAAMAAAD4/wwAAAACAAMAAAD3/w0AAAACAAMAAAD0/wkAAAACAAMAAADz/wkAAAACAAMAAADz/woAAAACAAMAAADy/woAAAACAAMAAAD2/w4AAAACAAMAAAD1/w8AAAACAAMAAADx/wsAAAACAAMAAADx/wwAAAACAAMAAADx/w0AAAACAAMAAADx/w8AAAACAAMAAADx/w4AAAACAAMAAADx/xAAAAACAAMAAADx/xEAAAACAAMAAADx/xIAAAACAAMAAADx/xMAAAACAAMAAADx/xQAAAACAAMAAADy/xQAAAACAAMAAADz/xQAAAACAAMAAAD0/xQAAAACAAMAAAD1/xQAAAACAAMAAAD2/xQAAAACAAMAAAD3/xQAAAACAAMAAAD4/xQAAAACAAMAAAD5/xQAAAACAAMAAAD2/xAAAAACAAMAAAD3/xAAAAACAAMAAAD7/wwAAAACAAMAAAD6/xQAAAACAAMAAAD7/xQAAAACAAMAAAD9/xQAAAACAAMAAAD+/xQAAAACAAMAAAD//xQAAAACAAMAAAD4/w8AAAACAAMAAAD5/w4AAAACAAMAAAD6/w0AAAACAAMAAAD9/w4AAAACAAMAAAD8/wsAAAACAAMAAAD6/wsAAAACAAMAAAD7/wsAAAACAAMAAAD6/wwAAAACAAMAAAD5/wwAAAACAAMAAAD5/w0AAAACAAMAAAD4/w0AAAACAAMAAAD3/w4AAAACAAMAAAD4/w4AAAACAAMAAAD3/w8AAAACAAMAAAD2/w8AAAACAAMAAAD+/w4AAAACAAMAAAD//w4AAAACAAMAAAAAAA4AAAACAAMAAAABAA4AAAACAAMAAAACAA4AAAACAAMAAAD//xMAAAACAAMAAAD//xIAAAACAAMAAAAAABIAAAACAAMAAAAAABEAAAACAAMAAAD//xEAAAACAAMAAAD//xAAAAACAAMAAAD//w8AAAACAAMAAAAAAA8AAAACAAMAAAAAABAAAAACAAMAAAAAABMAAAACAAMAAAAAABQAAAACAAMAAAACAA8AAAACAAMAAAACABAAAAACAAMAAAADABAAAAACAAMAAAAEABAAAAACAAMAAAAFABAAAAACAAMAAAAFABEAAAACAAMAAAAFABIAAAACAAMAAAAFABMAAAACAAMAAAAFABQAAAACAAMAAAAGABQAAAACAAMAAAAHABQAAAACAAMAAAAIABQAAAACAAMAAAAJABQAAAACAAMAAAAKABQAAAACAAMAAAAKABMAAAACAAMAAAAKABIAAAACAAMAAAAKABEAAAACAAMAAAAKABAAAAACAAMAAAALABAAAAACAAMAAAAMABAAAAACAAMAAAANABAAAAACAAMAAAAGABAAAAABAAIAAAAHABAAAAABAAIAAAAIABAAAAABAAIAAAAJABAAAAABAAIAAAAGABEAAAAAAAIAAAAHABEAAAAAAAIAAAAIABEAAAAAAAIAAAAJABEAAAAAAAIAAAAJABIAAAAAAAIAAAAIABIAAAAAAAIAAAAHABIAAAAAAAIAAAAGABIAAAAAAAIAAAAGABMAAAAAAAIAAAAHABMAAAAAAAIAAAAIABMAAAAAAAIAAAAJABMAAAAAAAIAAAAMAA8AAQACAAEAAAAOABAAAAACAAMAAAAPABAAAAACAAMAAAAQABAAAAACAAMAAAANAAwAAAACAAMAAAAOAAwAAAACAAMAAAAPAAwAAAACAAMAAAAQAAwAAAACAAMAAAAQABEAAAACAAMAAAAQABIAAAACAAMAAAAQABMAAAACAAMAAAAQABQAAAACAAMAAAARABQAAAACAAMAAAASABQAAAACAAMAAAATABQAAAACAAMAAAAUABQAAAACAAMAAAAVABQAAAACAAMAAAAWABQAAAACAAMAAAAXABQAAAACAAMAAAAYABQAAAACAAMAAAAZABQAAAACAAMAAAAaABQAAAACAAMAAAAaABMAAAACAAMAAAAaABIAAAACAAMAAAAaABEAAAACAAMAAAAaABAAAAACAAMAAAAaAA8AAAACAAMAAAARABAAAAABAAIAAAASABAAAAABAAIAAAATABAAAAABAAIAAAAUABAAAAABAAIAAAAVABAAAAABAAIAAAAWABAAAAABAAIAAAAXABAAAAABAAIAAAAYABAAAAABAAIAAAAZABAAAAABAAIAAAAZABEAAAAAAAIAAAAYABEAAAAAAAIAAAAXABEAAAAAAAIAAAAWABEAAAAAAAIAAAAVABEAAAAAAAIAAAAUABEAAAAAAAIAAAATABEAAAAAAAIAAAASABEAAAAAAAIAAAARABEAAAAAAAIAAAARABIAAAAAAAIAAAARABMAAAAAAAIAAAASABIAAAAAAAIAAAATABIAAAAAAAIAAAAUABIAAAAAAAIAAAAVABIAAAAAAAIAAAASABMAAAAAAAIAAAATABMAAAAAAAIAAAAUABMAAAAAAAIAAAAVABMAAAAAAAIAAAAWABMAAAAAAAIAAAAXABIAAAAAAAIAAAAWABIAAAAAAAIAAAAYABIAAAAAAAIAAAAYABMAAAAAAAIAAAAXABMAAAAAAAIAAAAZABIAAAAAAAIAAAAZABMAAAAAAAIAAAAaAA4AAAACAAMAAAAaAA0AAAACAAMAAAAaAAwAAAACAAMAAAAYAAwAAAACAAMAAAAXAAwAAAACAAMAAAAWAAwAAAACAAMAAAAZAAQAAAACAAMAAAAaAAQAAAACAAMAAAAYAAQAAAACAAMAAAAXAAQAAAACAAMAAAAWAAQAAAACAAMAAAAVAAQAAAACAAMAAAAOAAQAAAACAAMAAAAPAAQAAAACAAMAAAAQAAQAAAACAAMAAAARAAQAAAACAAMAAAASAAQAAAACAAMAAAATAAQAAAACAAMAAAAUAAQAAAACAAMAAAAOAAgAAAACAAMAAAAOAAcAAAACAAMAAAAOAAYAAAACAAMAAAAaAAsAAAACAAMAAAAaAAoAAAACAAMAAAAaAAkAAAACAAMAAAAaAAgAAAACAAMAAAAaAAUAAAACAAMAAAA=")
+tile_set = ExtResource("4_tileset")
+
+[node name="Exit" parent="." unique_id=995501978 instance=ExtResource("7_exit")]
+position = Vector2(1664, 270)
+
+[node name="Pyrazure" parent="." unique_id=1900220819 instance=ExtResource("1_dragon")]
+position = Vector2(352, 100)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=27138893]
+
+[node name="Squadroshock" parent="." unique_id=179419933 instance=ExtResource("3_squadroshock")]
+position = Vector2(296, 100)
+
+[node name="Lobulux" parent="." unique_id=1494763625 instance=ExtResource("5_lobulux")]
+position = Vector2(240, 100)
+
+[node name="Transpora" parent="." unique_id=907783296 instance=ExtResource("6_transpora")]
+position = Vector2(184, 100)
+
+[node name="GemEater" parent="." unique_id=1237595496 instance=ExtResource("9_ng40l")]
+position = Vector2(576, 606)
+
+[node name="Pedestal" parent="." unique_id=334886461 instance=ExtResource("10_04hp8")]
+position = Vector2(-150, 455)
+kind = "yellow"
+on_ceiling = true
+
+[node name="Pedestal2" parent="." unique_id=1526926200 instance=ExtResource("10_04hp8")]
+position = Vector2(-56, 635)
+kind = "yellow"
+
+[node name="Levipad" parent="." unique_id=583061602 instance=ExtResource("11_vru0x")]
+position = Vector2(-221, 1286)
+travel = 384.0
+
+[node name="Pedestal3" parent="." unique_id=1826322726 instance=ExtResource("10_04hp8")]
+position = Vector2(723, 837)
+kind = "white"
+on_ceiling = true
+
+[node name="Ice" parent="." unique_id=1621957686 instance=ExtResource("12_5oqfd")]
+position = Vector2(669, 1023)
+
+[node name="Ice2" parent="." unique_id=31669698 instance=ExtResource("12_5oqfd")]
+position = Vector2(669, 1003)
+
+[node name="Birdloch" parent="." unique_id=42407529 instance=ExtResource("13_8mt0c")]
+position = Vector2(603, 1031)
+
+[node name="Landfish" parent="." unique_id=1766578382 instance=ExtResource("14_dp2yl")]
+position = Vector2(156, 870)
+
+[node name="Ice3" parent="." unique_id=1992382179 instance=ExtResource("12_5oqfd")]
+position = Vector2(670, 980)
+
+[node name="Levipad2" parent="." unique_id=1198534233 instance=ExtResource("11_vru0x")]
+position = Vector2(1640, 1286)
+travel = 512.0
+
+[node name="Spikefish" parent="." unique_id=1027521692 instance=ExtResource("15_dp2yl")]
+position = Vector2(1631, 1149)
+
+[node name="Seasire" parent="." unique_id=821688307 instance=ExtResource("16_a7qdg")]
+position = Vector2(1637, 1066)
+
+[node name="Button" parent="." unique_id=1392720325 instance=ExtResource("17_g1ha7")]
+position = Vector2(1463, 1275)
+color = "blue"
+
+[node name="Door" parent="." unique_id=109450697 instance=ExtResource("18_g1ha7")]
+position = Vector2(1022, 1025)
+
+[node name="Deactivator" parent="." unique_id=1665026034 instance=ExtResource("19_52a3b")]
+position = Vector2(1108, 1257)
+sight_range = 600.0
+
+[node name="Deactivator2" parent="." unique_id=1348679823 instance=ExtResource("19_52a3b")]
+position = Vector2(835, 1001)
+
+[node name="BridgeMachine" parent="." unique_id=45539919 instance=ExtResource("20_52a3b")]
+position = Vector2(1422, 769)
+facing = -1
+
+[node name="Deactivator3" parent="." unique_id=2086181262 instance=ExtResource("19_52a3b")]
+position = Vector2(1065, 749)
+
+[node name="Levipad3" parent="." unique_id=1570262689 instance=ExtResource("11_vru0x")]
+position = Vector2(860, 774)
+travel = 512.0
+
+[node name="Planarioda" parent="." unique_id=2011566437 instance=ExtResource("21_3ff1r")]
+position = Vector2(1390, 247)
+
+[node name="Pillar" parent="." unique_id=1449293783 instance=ExtResource("22_cmohj")]
+position = Vector2(960, 483)
+rotation = 1.5707964
+height = 26

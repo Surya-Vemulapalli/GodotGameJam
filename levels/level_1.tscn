@@ -1,0 +1,67 @@
+[gd_scene format=4 uid="uid://chepwe7fnvog3"]
+
+[ext_resource type="PackedScene" uid="uid://b1lntemb7t1c4" path="res://dragon.tscn" id="1_dragon"]
+[ext_resource type="Script" uid="uid://c3jirdrdbd4l2" path="res://character_switcher.gd" id="2_switcher"]
+[ext_resource type="PackedScene" uid="uid://qggkstt2rsnt" path="res://squadroshock.tscn" id="3_squadroshock"]
+[ext_resource type="TileSet" uid="uid://cl30mytqkqixu" path="res://tileset.tres" id="4_tileset"]
+[ext_resource type="PackedScene" path="res://lobulux.tscn" id="5_lobulux"]
+[ext_resource type="PackedScene" path="res://transpora.tscn" id="6_transpora"]
+[ext_resource type="PackedScene" path="res://exit.tscn" id="7_exit"]
+[ext_resource type="PackedScene" path="res://tree.tscn" id="8_tree"]
+[ext_resource type="PackedScene" path="res://pillar.tscn" id="10_pillar"]
+[ext_resource type="PackedScene" path="res://sky.tscn" id="20_sky"]
+
+[node name="Level_1" type="Node2D" unique_id=1758354036 node_paths=PackedStringArray("up_character", "right_character", "down_character", "left_character", "camera", "spawn", "exit")]
+script = ExtResource("2_switcher")
+up_character = NodePath("Pyrazure")
+right_character = NodePath("Squadroshock")
+down_character = NodePath("Lobulux")
+left_character = NodePath("Transpora")
+camera = NodePath("Camera2D")
+spawn = NodePath("Spawn")
+exit = NodePath("Exit")
+next_level = "res://levels/level_2.tscn"
+title = "Level 1"
+
+[node name="Sky" parent="." unique_id=1971530572 instance=ExtResource("20_sky")]
+
+[node name="Spawn" type="Marker2D" parent="." unique_id=1801339422]
+position = Vector2(400, 100)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1921413542]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAACAAIAAQAAAAAAAAAsAAIAAQAAAAAAAAACAAMAAQAAAAAAAAAsAAMAAQAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAANAAQAAAAAAAAAAAAOAAQAAAAAAAAAAAAPAAQAAAAAAAAAAAAQAAQAAAAAAAAAAAARAAQAAAAAAAAAAAASAAQAAAAAAAAAAAATAAQAAAAAAAAAAAAUAAQAAAAAAAAAAAAVAAQAAAAAAAAAAAAWAAQAAAAAAAAAAAAXAAQAAAAAAAAAAAAYAAQAAAAAAAAAAAAZAAQAAAAAAAAAAAAaAAQAAAAAAAAAAAAcAAQAAAABAAIAAAAdAAQAAAABAAIAAAAeAAQAAAABAAIAAAAhAAQAAAABAAIAAAAiAAQAAAAAAAAAAAAjAAQAAAAAAAAAAAAkAAQAAAAAAAAAAAAlAAQAAAAAAAAAAAAmAAQAAAAAAAAAAAAnAAQAAAAAAAAAAAAoAAQAAAAAAAAAAAApAAQAAAAAAAAAAAAqAAQAAAAAAAAAAAArAAQAAAAAAAAAAAAsAAQAAAAAAAAAAAAcAAUAAAAAAAIAAAAdAAUAAAAAAAIAAAAeAAUAAAAAAAIAAAAeAAYAAAAAAAEAAAAfAAYAAAAAAAIAAAAdAAYAAAAAAAEAAAAcAAYAAAAAAAEAAAAKAAQAAAAAAAEAAAALAAQAAAAAAAEAAAAMAAQAAAAAAAEAAAAbAAQAAAADAAIAAAAbAAUAAAADAAIAAAAbAAYAAAADAAIAAAAgAAQAAAABAAIAAAAfAAQAAAABAAIAAAAfAAUAAAAAAAIAAAAgAAUAAAAAAAIAAAAgAAYAAAAAAAIAAAAhAAUAAAAAAAIAAAAhAAYAAAAAAAIAAAAfAAcAAAAAAAEAAAAiAAUAAAADAAIAAAAiAAYAAAADAAIAAAAiAAcAAAADAAIAAAAiAAgAAAADAAIAAAAfAAgAAAADAAIAAAAgAAcAAAAAAAIAAAAhAAcAAAAAAAIAAAAgAAgAAAAAAAIAAAAhAAgAAAAAAAIAAAAeAAcAAAAAAAEAAAAfAAkAAAAAAAEAAAAiAAkAAAAAAAEAAAAfAAoAAAAAAAEAAAAiAAoAAAAAAAEAAAAgAAoAAAAAAAEAAAAhAAoAAAAAAAEAAAAgAAkAAAAAAAIAAAAhAAkAAAAAAAIAAAAjAAMAAQAAAAAAAAAjAAIAAQAAAAAAAAAjAAEAAQAAAAAAAAAjAAAAAQAAAAAAAAAjAP//AQAAAAAAAAAjAP7/AQAAAAAAAAAjAP3/AQAAAAAAAAAjAPz/AQAAAAAAAAAjAPv/AQAAAAAAAAAjAPr/AQAAAAAAAAAsAAEAAQAAAAAAAAA=")
+tile_set = ExtResource("4_tileset")
+
+[node name="Exit" parent="." unique_id=1218020707 instance=ExtResource("7_exit")]
+position = Vector2(2720, 256)
+
+[node name="Tree" parent="." unique_id=1414550725 instance=ExtResource("8_tree")]
+position = Vector2(1312, 256)
+needs_blue = true
+
+[node name="ElectricPillar" parent="." unique_id=1996245107 instance=ExtResource("10_pillar")]
+position = Vector2(2336, 256)
+height = 100
+
+[node name="Pyrazure" parent="." unique_id=401308991 instance=ExtResource("1_dragon")]
+position = Vector2(400, 100)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=607867820]
+
+[node name="Squadroshock" parent="." unique_id=1807798408 instance=ExtResource("3_squadroshock")]
+position = Vector2(344, 100)
+
+[node name="Lobulux" parent="." unique_id=1455597071 instance=ExtResource("5_lobulux")]
+position = Vector2(288, 100)
+
+[node name="Transpora" parent="." unique_id=64063344 instance=ExtResource("6_transpora")]
+position = Vector2(232, 100)
+
+[node name="FirePillar" parent="." unique_id=174938608 instance=ExtResource("10_pillar")]
+position = Vector2(1656, 246)
+kind = "fire"
+height = 100
+
+[node name="Tree2" parent="." unique_id=1870405373 instance=ExtResource("8_tree")]
+position = Vector2(903, 259)

@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://bridge_machine.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://sprites/items.png" id="2_items"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_machine"]
+size = Vector2(29, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bridge"]
+size = Vector2(1, 8)
+
+[node name="BridgeMachine" type="Area2D"]
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -10.5)
+texture = ExtResource("2_items")
+region_enabled = true
+region_rect = Rect2(136, 225, 29, 21)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10.5)
+shape = SubResource("RectangleShape2D_machine")
+
+[node name="Bridge" type="StaticBody2D" parent="."]
+
+[node name="Planks" type="Node2D" parent="Bridge"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bridge"]
+shape = SubResource("RectangleShape2D_bridge")
+disabled = true

@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bb2c1whfnoh7k"]
+
+[ext_resource type="PackedScene" uid="uid://b1lntemb7t1c4" path="res://dragon.tscn" id="1_dragon"]
+[ext_resource type="Script" uid="uid://c3jirdrdbd4l2" path="res://character_switcher.gd" id="2_switcher"]
+[ext_resource type="PackedScene" uid="uid://qggkstt2rsnt" path="res://squadroshock.tscn" id="3_squadroshock"]
+[ext_resource type="TileSet" uid="uid://cl30mytqkqixu" path="res://tileset.tres" id="4_tileset"]
+[ext_resource type="PackedScene" path="res://lobulux.tscn" id="5_lobulux"]
+[ext_resource type="PackedScene" path="res://transpora.tscn" id="6_transpora"]
+[ext_resource type="PackedScene" path="res://exit.tscn" id="7_exit"]
+[ext_resource type="PackedScene" path="res://sky.tscn" id="20_sky"]
+
+[node name="Level" type="Node2D" unique_id=1142901654 node_paths=PackedStringArray("up_character", "right_character", "down_character", "left_character", "camera", "spawn", "up_spawn", "right_spawn", "down_spawn", "left_spawn", "exit")]
+script = ExtResource("2_switcher")
+up_character = NodePath("Pyrazure")
+right_character = NodePath("Squadroshock")
+down_character = NodePath("Lobulux")
+left_character = NodePath("Transpora")
+camera = NodePath("Camera2D")
+spawn = NodePath("Spawn")
+up_spawn = NodePath("PyrazureSpawn")
+right_spawn = NodePath("SquadroshockSpawn")
+down_spawn = NodePath("LobuluxSpawn")
+left_spawn = NodePath("TransporaSpawn")
+exit = NodePath("Exit")
+next_level = "res://levels/level_6.tscn"
+title = "Level 5"
+
+[node name="Sky" parent="." unique_id=2008927905 instance=ExtResource("20_sky")]
+sky = 6
+
+[node name="Spawn" type="Marker2D" parent="." unique_id=761541706]
+position = Vector2(352, 100)
+
+[node name="PyrazureSpawn" type="Marker2D" parent="." unique_id=912882623]
+position = Vector2(352, 100)
+
+[node name="SquadroshockSpawn" type="Marker2D" parent="." unique_id=1625133979]
+position = Vector2(800, 100)
+
+[node name="LobuluxSpawn" type="Marker2D" parent="." unique_id=1809314622]
+position = Vector2(1250, 100)
+
+[node name="TransporaSpawn" type="Marker2D" parent="." unique_id=1525721582]
+position = Vector2(1700, 100)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=81121295]
+texture_filter = 1
+tile_set = ExtResource("4_tileset")
+
+[node name="Exit" parent="." unique_id=244244011 instance=ExtResource("7_exit")]
+position = Vector2(1536, 270)
+
+[node name="Pyrazure" parent="." unique_id=730032140 instance=ExtResource("1_dragon")]
+position = Vector2(-1501, -460)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1078416176]
+
+[node name="Squadroshock" parent="." unique_id=1197839922 instance=ExtResource("3_squadroshock")]
+position = Vector2(296, 100)
+
+[node name="Lobulux" parent="." unique_id=1260456248 instance=ExtResource("5_lobulux")]
+position = Vector2(240, 100)
+
+[node name="Transpora" parent="." unique_id=1687242270 instance=ExtResource("6_transpora")]
+position = Vector2(184, 100)

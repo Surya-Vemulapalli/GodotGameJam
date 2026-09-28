@@ -1,0 +1,33 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://sky.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://sprites/skies.png" id="2_skies"]
+
+[node name="Sky" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Color" type="ColorRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0.839216, 0.968627, 1)
+
+[node name="Parallax" type="Parallax2D" parent="."]
+repeat_size = Vector2(640, 0)
+repeat_times = 4
+scroll_scale = Vector2(1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax"]
+texture_filter = 1
+position = Vector2(0, 4)
+scale = Vector2(10, 10)
+texture = ExtResource("2_skies")
+centered = false
+region_enabled = true
+region_rect = Rect2(64, 0, 64, 64)

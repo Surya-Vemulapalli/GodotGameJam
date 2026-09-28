@@ -1,0 +1,42 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://sprites/warmcopter.png" id="1_sheet"]
+[ext_resource type="Script" path="res://warmcopter.gd" id="2_script"]
+
+[sub_resource type="AtlasTexture" id="Atlas_f1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="Atlas_f2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_warmcopter"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Atlas_f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Atlas_f2")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_warmcopter"]
+size = Vector2(22, 30)
+
+[node name="Warmcopter" type="CharacterBody2D"]
+script = ExtResource("2_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_warmcopter")
+animation = &"fly"
+autoplay = "fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-14, -2)
+shape = SubResource("RectangleShape2D_warmcopter")

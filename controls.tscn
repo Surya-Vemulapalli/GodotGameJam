@@ -1,0 +1,162 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://controls.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://sprites/skies.png" id="2_background"]
+
+[sub_resource type="AtlasTexture" id="Atlas_sky"]
+atlas = ExtResource("2_background")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="StyleBoxFlat" id="Style_normal"]
+bg_color = Color(0.1, 0.12, 0.2, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_hover"]
+bg_color = Color(0.18, 0.22, 0.36, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_pressed"]
+bg_color = Color(0.05, 0.06, 0.11, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_focus"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="Theme" id="Theme_menu"]
+Button/styles/normal = SubResource("Style_normal")
+Button/styles/hover = SubResource("Style_hover")
+Button/styles/pressed = SubResource("Style_pressed")
+Button/styles/focus = SubResource("Style_focus")
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.976471, 0.933333, 1)
+
+[node name="Sky" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("Atlas_sky")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Page" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = 24.0
+offset_right = -48.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_menu")
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Page"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.1, 0.12, 0.2, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 36
+text = "Controls"
+horizontal_alignment = 1
+
+[node name="Columns" type="HBoxContainer" parent="Page"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+
+[node name="Everyone" type="Label" parent="Page/Columns"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.1, 0.12, 0.2, 1)
+theme_override_constants/outline_size = 6
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "EVERYONE (gamepad)
+Left stick: move (arrow keys on a keyboard)
+B: jump
+X: main action
+Y: attack
+LB: restart the level (asks first)
+LT: quit to the start page (asks first)
+D-pad: switch character
+    up: Pyrazure
+    right: Squadroshock
+    down: Lobulux
+    left: Transpora
+
+Get all four characters into the cave to finish a level.
+If anyone dies, the level starts over."
+autowrap_mode = 3
+
+[node name="Characters" type="Label" parent="Page/Columns"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.1, 0.12, 0.2, 1)
+theme_override_constants/outline_size = 6
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "PYRAZURE
+RB: switch between standing and crawling
+X: tap for red fire, hold 1 second for blue fire
+Y: claw (standing); torpedo roll (flying or swimming)
+Crawling, hold B to fly; in water, swim with the stick or B
+(swim up at the surface to climb out)
+
+SQUADROSHOCK
+X: place a platform, or switch a machine it's next to
+Y: electric spear (can't jump)
+
+LOBULUX
+X: grab; X again, then push the stick to throw
+X next to a lever: pull it
+
+TRANSPORA
+X: pick up or put down an item
+Hold Y: laser, straight up"
+autowrap_mode = 3
+
+[node name="Back" type="Button" parent="Page"]
+custom_minimum_size = Vector2(200, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 22
+text = "Back"
